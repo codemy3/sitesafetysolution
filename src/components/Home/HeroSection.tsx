@@ -20,7 +20,7 @@ const slides = [
     title: "Automation",
     subtitle: "Intelligent Environment Control",
     description: "Seamlessly control climate, lighting, and curtains from a single, intuitive centralized interface.",
-    image: "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/hero_automation.png",
     href: "/services#automation",
   },
   {
@@ -28,7 +28,8 @@ const slides = [
     title: "Access",
     subtitle: "Enterprise Biometric Systems",
     description: "Advanced fingerprint, facial recognition, and digital locks for absolute perimeter control.",
-    image: "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/visitor-entry-system.jpg",
+    imageMobile: "/images/hero3_access_mobile.png",
     href: "/services#access",
   },
   {
@@ -36,7 +37,7 @@ const slides = [
     title: "Perimeter",
     subtitle: "High-Speed Traffic Management",
     description: "Robust boom barriers and public address systems engineered for heavy, continuous daily use.",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/boom-barriers.png",
     href: "/services#gates",
   }
 ];
@@ -80,23 +81,42 @@ export default function HeroSection() {
             transition={{ duration: 0.4 }} // Fast crossfade
             className="absolute inset-0 h-full w-full"
           >
-            <Image
-              src={slides[active].image}
-              alt={slides[active].title}
-              fill
-              priority // Ensures the browser loads it immediately
-              className="object-cover"
-            />
+            {(slides as any)[active].imageMobile ? (
+              <>
+                <Image
+                  src={(slides as any)[active].imageMobile}
+                  alt={slides[active].title}
+                  fill
+                  priority
+                  className="object-cover object-center md:hidden"
+                />
+                <Image
+                  src={slides[active].image}
+                  alt={slides[active].title}
+                  fill
+                  priority
+                  className="hidden object-cover object-center md:block"
+                />
+              </>
+            ) : (
+              <Image
+                src={slides[active].image}
+                alt={slides[active].title}
+                fill
+                priority // Ensures the browser loads it immediately
+                className="object-cover object-center"
+              />
+            )}
           </motion.div>
         </AnimatePresence>
 
         {/* Dark overlay for perfect contrast */}
-        <div className="absolute inset-0 bg-black/40 z-0" />
+        <div className="absolute inset-0 bg-black/50 z-0" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-black/80 pointer-events-none z-0" />
       </div>
 
       {/* --- 2. CENTERED MAIN CONTENT --- */}
-      <div className="relative z-20 flex w-full flex-col items-center px-6 text-center -mt-10 md:-mt-20">
+      <div className="relative z-20 flex w-full flex-col items-center px-4 sm:px-6 text-center -mt-16 md:-mt-20">
         {/* We keep mode="wait" on the text so it doesn't overlap messily during rapid clicks */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -108,22 +128,22 @@ export default function HeroSection() {
             className="flex max-w-5xl flex-col items-center"
           >
             {/* Title with Tech Corner Brackets */}
-            <div className="relative mb-6 inline-block px-8 py-4 sm:px-12 sm:py-6">
-              <div className="absolute left-0 top-0 h-4 w-4 border-l-2 border-t-2 border-white/40 md:h-6 md:w-6" />
-              <div className="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-white/40 md:h-6 md:w-6" />
+            <div className="relative mb-4 sm:mb-6 inline-block px-6 py-3 sm:px-12 sm:py-6">
+              <div className="absolute left-0 top-0 h-3 w-3 sm:h-4 sm:w-4 border-l-2 border-t-2 border-white/40 md:h-6 md:w-6" />
+              <div className="absolute bottom-0 right-0 h-3 w-3 sm:h-4 sm:w-4 border-b-2 border-r-2 border-white/40 md:h-6 md:w-6" />
 
-              <h1 className="text-4xl font-black uppercase tracking-[0.15em] text-white sm:text-6xl md:text-7xl lg:text-[7.5rem] leading-none drop-shadow-2xl">
+              <h1 className="text-3xl font-black uppercase tracking-[0.1em] text-white sm:text-5xl md:tracking-[0.15em] md:text-7xl lg:text-[7.5rem] leading-none drop-shadow-2xl">
                 {slides[active].title}
               </h1>
             </div>
 
-            <p className="mb-8 max-w-2xl text-xs font-medium leading-relaxed text-white/90 sm:text-sm md:text-base lg:text-lg">
+            <p className="mb-6 sm:mb-8 max-w-2xl px-4 text-xs font-medium leading-relaxed text-white/90 sm:text-sm md:text-base lg:text-lg">
               {slides[active].description}
             </p>
 
             <Link
               href={slides[active].href}
-              className="group relative flex items-center justify-center gap-3 overflow-hidden border border-white/50 bg-transparent px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:border-white hover:bg-white hover:text-black md:px-10 md:py-4 md:text-xs"
+              className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-primary bg-primary px-6 py-2.5 sm:px-8 sm:py-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_12px_30px_rgba(0,62,71,0.25)] transition-all hover:bg-primary/90 hover:border-primary/90 md:px-10 md:py-4 md:text-xs"
             >
               <span className="relative z-10">Get a Free Quote</span>
             </Link>
@@ -132,31 +152,31 @@ export default function HeroSection() {
       </div>
 
       {/* --- 3. CIRCULAR SIDE NAVIGATION ARROWS --- */}
-      <div className="absolute left-2 top-1/2 z-20 -translate-y-1/2 md:left-6 lg:left-12">
-        <button onClick={prevSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
-          <ArrowLeft size={18} strokeWidth={1.5} />
+      <div className="absolute left-2 top-1/2 z-20 -translate-y-1/2 sm:left-4 md:left-6 lg:left-12">
+        <button onClick={prevSlide} className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
+          <ArrowLeft size={16} strokeWidth={1.5} className="sm:h-[18px] sm:w-[18px]" />
         </button>
       </div>
-      <div className="absolute right-2 top-1/2 z-20 -translate-y-1/2 md:right-6 lg:right-12">
-        <button onClick={nextSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
-          <ArrowRight size={18} strokeWidth={1.5} />
+      <div className="absolute right-2 top-1/2 z-20 -translate-y-1/2 sm:right-4 md:right-6 lg:right-12">
+        <button onClick={nextSlide} className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
+          <ArrowRight size={16} strokeWidth={1.5} className="sm:h-[18px] sm:w-[18px]" />
         </button>
       </div>
 
       {/* --- 4. BOTTOM STATIC FEATURE DOCK --- */}
-      <div className="absolute bottom-0 left-0 z-30 w-full px-2 pb-6 pt-20 md:px-6 md:pb-10">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+      <div className="absolute bottom-0 left-0 z-30 w-full px-2 pb-4 pt-16 sm:pb-6 sm:pt-20 md:px-6 md:pb-10">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent md:via-black/60" />
 
         <div className="relative z-10 mx-auto w-full max-w-7xl">
-          <div className="grid grid-cols-3 gap-y-6 gap-x-2 md:flex md:justify-between md:gap-4">
+          <div className="grid grid-cols-3 gap-y-4 gap-x-2 md:flex md:justify-between md:gap-4">
             {bottomFeatures.map((item, idx) => (
-              <div key={idx} className="group flex flex-col items-center justify-center gap-3 transition-transform hover:-translate-y-1 cursor-pointer md:flex-1">
+              <div key={idx} className="group flex flex-col items-center justify-center gap-2 sm:gap-3 transition-transform hover:-translate-y-1 cursor-pointer md:flex-1">
                 <div className="text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]">
-                  <div className="scale-90 md:scale-100">
+                  <div className="scale-75 sm:scale-90 md:scale-100">
                     {item.icon}
                   </div>
                 </div>
-                <span className="text-center text-[9px] font-black uppercase tracking-[0.15em] text-white/90 md:text-[10px] lg:text-[11px] lg:tracking-[0.2em]">
+                <span className="text-center text-[7px] sm:text-[9px] font-black uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white/90 md:text-[10px] lg:text-[11px] lg:tracking-[0.2em]">
                   {item.label}
                 </span>
               </div>
