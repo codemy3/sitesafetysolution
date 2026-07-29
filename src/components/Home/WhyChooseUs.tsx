@@ -148,10 +148,7 @@ export default function ModernTechSection() {
 
             {/* Stats row */}
             <div className="mt-10 flex items-center gap-8 border-t border-slate-800 pt-6">
-              <div>
-                <p className="text-2xl font-black text-white sm:text-3xl">500+</p>
-                <p className="text-xs font-mono uppercase tracking-wider text-slate-500">Smart Homes</p>
-              </div>
+              
               <div className="h-10 w-px bg-slate-800" />
               <div>
                 <p className="text-2xl font-black text-white sm:text-3xl">15+</p>

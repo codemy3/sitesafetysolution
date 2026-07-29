@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, Cctv, Network, Settings, Monitor, HardDrive, MessagesSquare } from "lucide-react";
+import { ArrowRight, ArrowLeft, Cctv, Cpu, Fingerprint, DoorOpen, Video, BellRing } from "lucide-react";
 
 const slides = [
   {
@@ -43,12 +43,12 @@ const slides = [
 ];
 
 const bottomFeatures = [
-  { label: "INSTALLATION", icon: <Cctv size={56} strokeWidth={1.5} /> },
-  { label: "SYSTEM DESIGN", icon: <Network size={56} strokeWidth={1.5} /> },
-  { label: "MAINTENANCE", icon: <Settings size={56} strokeWidth={1.5} /> },
-  { label: "MONITORING", icon: <Monitor size={56} strokeWidth={1.5} /> },
-  { label: "STORAGE & BACKUP", icon: <HardDrive size={56} strokeWidth={1.5} /> },
-  { label: "CONSULTATION", icon: <MessagesSquare size={56} strokeWidth={1.5} /> }
+  { label: "SURVEILLANCE", icon: <Cctv size={56} strokeWidth={1.5} /> },
+  { label: "HOME AUTOMATION", icon: <Cpu size={56} strokeWidth={1.5} /> },
+  { label: "ACCESS CONTROL", icon: <Fingerprint size={56} strokeWidth={1.5} /> },
+  { label: "GATE AUTOMATION", icon: <DoorOpen size={56} strokeWidth={1.5} /> },
+  { label: "VIDEO DOOR PHONES", icon: <Video size={56} strokeWidth={1.5} /> },
+  { label: "INTRUSION ALARMS", icon: <BellRing size={56} strokeWidth={1.5} /> }
 ];
 
 const SLIDE_DURATION = 6000;
