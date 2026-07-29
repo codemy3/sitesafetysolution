@@ -1,6 +1,7 @@
 "use client";
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { 
   Wrench, 
@@ -230,9 +231,9 @@ export default function ModernProductsPage() {
                                </div>
                              </div>
                              
-                             <button className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#B8AD76] text-slate-900 shadow-lg shadow-[#B8AD76]/20 transition-all hover:scale-110 hover:shadow-[#B8AD76]/40">
+                             <Link href="/contact" className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#B8AD76] text-slate-900 shadow-lg shadow-[#B8AD76]/20 transition-all hover:scale-110 hover:shadow-[#B8AD76]/40">
                                <ArrowUpRight size={18} className="sm:h-5 sm:w-5" />
-                             </button>
+                             </Link>
                           </div>
                         </div>
                       </div>
@@ -284,9 +285,9 @@ export default function ModernProductsPage() {
                           <span className={`${mono.className} text-[10px] font-bold text-slate-400 uppercase tracking-widest`}>
                             STATUS: <span className="text-emerald-500">AVAILABLE</span>
                           </span>
-                          <button className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-500 transition-all group-hover:bg-[#B8AD76] group-hover:text-white group-hover:border-[#B8AD76]">
+                          <Link href="/contact" className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-500 transition-all group-hover:bg-[#B8AD76] group-hover:text-white group-hover:border-[#B8AD76]">
                             <ChevronRight size={18} />
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </motion.div>
