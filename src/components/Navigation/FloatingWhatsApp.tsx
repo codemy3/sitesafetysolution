@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 export default function FloatingWhatsApp() {
-  const phoneNumber = '918147989035';
+  const phoneNumber = '918310531305';
   const message = encodeURIComponent('Hello TechFin, I would like to enquire about your security solutions.');
 
   return (

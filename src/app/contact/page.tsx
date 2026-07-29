@@ -34,6 +34,21 @@ export default function ContactPage() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+
+    // Build WhatsApp message from form data
+    const whatsappNumber = '918310531305';
+    let text = `*New Enquiry from Website*\n\n`;
+    text += `*Name:* ${formData.name}\n`;
+    text += `*Email:* ${formData.email}\n`;
+    text += `*Phone:* ${formData.phone}\n`;
+    if (formData.service) {
+      text += `*Service Interest:* ${formData.service}\n`;
+    }
+    text += `*Message:* ${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank');
+
     setSubmitted(true);
   };
 
@@ -247,9 +262,9 @@ export default function ContactPage() {
                     <div>
                       <h4 className="font-mono text-xs text-slate-400 uppercase tracking-wider mb-1">Office Coordinates</h4>
                       <p className="leading-relaxed text-slate-200">
-                        20-3-253/72, Regal Plaza<br />
-                        2nd Floor, Near Rao & Rao Circle<br />
-                        Mangaluru, Karnataka - 575001
+                        Shakir Complex, Behind Hotel Nawfal<br />
+                        1st Floor, Mission Street, Bunder<br />
+                        Mangalore, Karnataka - 575001
                       </p>
                     </div>
                   </div>
@@ -262,8 +277,8 @@ export default function ContactPage() {
                       <h4 className="font-mono text-xs text-slate-400 uppercase tracking-wider mb-1">Direct Lines</h4>
                       <p className="leading-relaxed font-mono text-slate-200">
                         +91 81479 89035<br />
-                        +91 91643 59081<br />
-                        +91 91648 28187
+                        +91 91648 28187<br />
+                        +91 83105 31305
                       </p>
                     </div>
                   </div>
@@ -274,7 +289,7 @@ export default function ContactPage() {
                     </div>
                     <div className="min-w-0">
                       <h4 className="font-mono text-xs text-slate-400 uppercase tracking-wider mb-1">Electronic Mail</h4>
-                      <p className="font-mono text-slate-200 break-all max-w-full">excelenterprisesmangalore@gmail.com</p>
+                      <p className="font-mono text-slate-200 break-all max-w-full">techfinent@gmail.com</p>
                     </div>
                   </div>
                 </div>

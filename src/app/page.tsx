@@ -1,9 +1,9 @@
-"use client";
+
 
 import HeroSection from '@/components/Home/HeroSection';
 import HomeAboutSection from '@/components/Home/HomeAboutSection';
 import ServicesOverview from '@/components/Home/ServicesOverview';
-import WhyChooseUs from '@/components/Home/WhyChooseUs';
+import ModernTechSection from '@/components/Home/WhyChooseUs';
 import ClientsSection from '@/components/Home/ClientsSection';
 import CTASection from '@/components/Home/CTASection';
 
@@ -13,7 +13,7 @@ export default function HomePage() {
       <HeroSection />
       <HomeAboutSection />
       <ServicesOverview />
-      <WhyChooseUs />
+      <ModernTechSection />
       <ClientsSection />
       <CTASection />
     </main>

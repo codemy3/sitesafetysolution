@@ -18,7 +18,7 @@ const fadeUp = {
 
 export default function HomeAboutSection() {
   return (
-    <section className="relative overflow-hidden bg-white pb-20 lg:pb-28">
+    <section className="relative overflow-hidden bg-white pt-20 pb-20 lg:pt-32 lg:pb-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
           
@@ -34,8 +34,15 @@ export default function HomeAboutSection() {
               <Image src="/images/about1.jpg" alt="Security installation" fill className="object-cover" />
             </motion.div>
 
-            <motion.div variants={fadeUp} className="absolute bottom-0 right-0 z-10 h-[60%] w-[75%] overflow-hidden rounded-[2.5rem] border-[12px] border-white bg-slate-100 shadow-2xl">
-              <Image src="/images/about2.jpg" alt="Security monitoring" fill className="object-cover" />
+            <motion.div variants={fadeUp} className="absolute bottom-0 right-0 z-10 h-[60%] w-[75%] overflow-hidden rounded-[2.5rem] border-[12px] border-white bg-slate-900 shadow-2xl">
+              <video
+                src="/about2.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="h-full w-full object-cover"
+              />
             </motion.div>
 
             {/* Rotating Badge */}

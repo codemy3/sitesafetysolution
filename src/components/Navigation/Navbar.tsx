@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react';
 
@@ -30,6 +31,12 @@ const navItems: NavItem[] = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  // Auto-close mobile menu on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 px-2 pt-3 sm:px-6 sm:pt-6 lg:px-8">
@@ -50,7 +57,9 @@ export default function Navbar() {
             >
               <Link 
                 href={item.href} 
-                className="group flex items-center gap-1 py-4 text-sm font-semibold text-slate-700 transition hover:text-primary"
+                className={`group flex items-center gap-1 py-4 text-sm font-semibold transition hover:text-primary ${
+                  pathname === item.href ? 'text-primary' : 'text-slate-700'
+                }`}
               >
                 {item.label}
                 {item.dropdown && (
@@ -109,49 +118,64 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       <AnimatePresence>
         {open && (
-          <motion.div 
-            key="mobile-menu"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute left-2 right-2 top-16 z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[1.5rem] border border-slate-200/80 bg-white p-4 shadow-[0_18px_45px_rgba(15,23,42,0.16)] sm:left-4 sm:right-4 lg:hidden"
-          >
-            <div className="flex flex-col gap-2">
-              {navItems.map((item) => (
-                <div key={item.label} className="flex flex-col">
-                  <Link 
-                    href={item.href} 
-                    className="flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium text-slate-800 hover:bg-slate-50" 
-                    onClick={() => !item.dropdown && setOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                  {/* Indented Mobile Dropdown Items */}
-                  {item.dropdown && (
-                    <div className="flex flex-col border-l-2 border-slate-100 ml-6 pl-4 mt-1">
-                      {item.dropdown.map((dropItem: DropdownItem) => (
-                        <Link
-                          key={dropItem.label}
-                          href={dropItem.href}
+          <>
+            {/* Backdrop overlay — tap to close */}
+            <motion.div
+              key="mobile-backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
+              onClick={() => setOpen(false)}
+            />
+            <motion.div 
+              key="mobile-menu"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.15 }}
+              className="absolute left-2 right-2 top-16 z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[1.5rem] border border-slate-200/80 bg-white p-4 shadow-[0_18px_45px_rgba(15,23,42,0.16)] sm:left-4 sm:right-4 lg:hidden"
+            >
+              <div className="flex flex-col gap-2">
+                {navItems.map((item) => (
+                  <div key={item.label} className="flex flex-col">
+                    <Link 
+                      href={item.href} 
+                      className={`flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium hover:bg-slate-50 ${
+                        pathname === item.href ? 'text-primary bg-slate-50' : 'text-slate-800'
+                      }`}
+                      onClick={() => setOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                    {/* Indented Mobile Dropdown Items */}
+                    {item.dropdown && (
+                      <div className="flex flex-col border-l-2 border-slate-100 ml-6 pl-4 mt-1">
+                        {item.dropdown.map((dropItem: DropdownItem) => (
+                          <Link
+                            key={dropItem.label}
+                            href={dropItem.href}
                             className="block rounded-lg py-2 text-sm font-medium text-slate-500 hover:text-primary"
-                          onClick={() => setOpen(false)}
-                        >
-                          {dropItem.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))}
-              <Link 
-                href="/contact" 
-                className="mt-4 flex justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(0,62,71,0.2)]"
-                onClick={() => setOpen(false)}
-              >
-                Get A Quote
-              </Link>
-            </div>
-          </motion.div>
+                            onClick={() => setOpen(false)}
+                          >
+                            {dropItem.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ))}
+                <Link 
+                  href="/contact" 
+                  className="mt-4 flex justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(0,62,71,0.2)]"
+                  onClick={() => setOpen(false)}
+                >
+                  Get A Quote
+                </Link>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </header>

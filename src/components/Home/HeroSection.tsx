@@ -1,165 +1,170 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowRight, Play, Cctv, ShieldAlert, ShieldCheck } from 'lucide-react';
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ArrowLeft, Cctv, Network, Settings, Monitor, HardDrive, MessagesSquare } from "lucide-react";
 
-const features = [
+const slides = [
   {
-    icon: <Cctv className="mb-4 h-12 w-12 text-primary" strokeWidth={1.5} />,
-    title: 'Premium Indoor\nCameras'
+    id: "01",
+    title: "Surveillance",
+    subtitle: "AI-Powered Threat Detection",
+    description: "Enterprise-grade monitoring systems with real-time analytics and predictive threat assessment designed to provide 24/7 surveillance and peace of mind.",
+    image: "/images/hero1.png", // Replace with your image
+    href: "/services#surveillance",
   },
   {
-    icon: <ShieldAlert className="mb-4 h-12 w-12 text-primary" strokeWidth={1.5} />,
-    title: '24/7 Quick Alarms\nResponse'
+    id: "02",
+    title: "Automation",
+    subtitle: "Intelligent Environment Control",
+    description: "Seamlessly control climate, lighting, and curtains from a single, intuitive centralized interface.",
+    image: "https://images.unsplash.com/photo-1558002038-1055907df827?q=80&w=2000&auto=format&fit=crop",
+    href: "/services#automation",
   },
   {
-    icon: <ShieldCheck className="mb-4 h-12 w-12 text-primary" strokeWidth={1.5} />,
-    title: 'Amazing Security\nSystems'
+    id: "03",
+    title: "Access",
+    subtitle: "Enterprise Biometric Systems",
+    description: "Advanced fingerprint, facial recognition, and digital locks for absolute perimeter control.",
+    image: "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?q=80&w=2000&auto=format&fit=crop",
+    href: "/services#access",
+  },
+  {
+    id: "04",
+    title: "Perimeter",
+    subtitle: "High-Speed Traffic Management",
+    description: "Robust boom barriers and public address systems engineered for heavy, continuous daily use.",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2000&auto=format&fit=crop",
+    href: "/services#gates",
   }
 ];
 
-// Advanced animation variants
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    }
-  }
-};
+const bottomFeatures = [
+  { label: "INSTALLATION", icon: <Cctv size={56} strokeWidth={1.5} /> },
+  { label: "SYSTEM DESIGN", icon: <Network size={56} strokeWidth={1.5} /> },
+  { label: "MAINTENANCE", icon: <Settings size={56} strokeWidth={1.5} /> },
+  { label: "MONITORING", icon: <Monitor size={56} strokeWidth={1.5} /> },
+  { label: "STORAGE & BACKUP", icon: <HardDrive size={56} strokeWidth={1.5} /> },
+  { label: "CONSULTATION", icon: <MessagesSquare size={56} strokeWidth={1.5} /> }
+];
 
-const springReveal = {
-  hidden: { opacity: 0, y: 30 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { type: "spring", stiffness: 40, damping: 12 } 
-  }
-};
-
-const imageReveal = {
-  hidden: { opacity: 0, x: 50, scale: 0.9 },
-  show: { 
-    opacity: 1, 
-    x: 0, 
-    scale: 1,
-    transition: { duration: 0.8, ease: "easeOut", delay: 0.4 } 
-  }
-};
+const SLIDE_DURATION = 6000;
 
 export default function HeroSection() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActive((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, SLIDE_DURATION);
+    return () => clearInterval(timer);
+  }, [active]);
+
+  const nextSlide = () => setActive((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+  const prevSlide = () => setActive((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+
   return (
-    // Set root to white (or transparent if your page body is white) so the overlap is visible
-    <div className="bg-white pb-14 sm:pb-20"> 
-      
-      {/* 1. DARK HERO SECTION */}
-      <div className="relative flex flex-col bg-slate-800 pb-20 sm:pb-24 lg:pb-32">
-        
-        {/* Dark Background Control Room Image */}
-        <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
-          <div className="absolute inset-0 z-10 bg-gradient-to-r from-slate-900/80 via-slate-800/55 to-slate-800/20" />
-          <motion.div 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, ease: "easeOut" }}
-            className="relative h-full w-full"
-          >
-            <Image 
-              src="/images/hero-background.png" 
-              alt="Security Control Room Background" 
-              fill 
-              priority
-              className="object-cover" 
-            />
-          </motion.div>
-        </div>
+    <section className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0a0a] flex flex-col justify-center">
 
-        {/* Main Hero Content - Grid Layout */}
-        <motion.section 
-          variants={staggerContainer}
-          initial="hidden"
-          animate="show"
-          className="relative z-10 mx-auto grid w-full max-w-7xl flex-1 grid-cols-1 items-center gap-8 px-4 pt-28 sm:gap-12 sm:px-6 sm:pt-36 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pt-40"
-        >
-          {/* Left Column: Text & CTAs */}
-          <div className="max-w-2xl">
-            <motion.div 
-              variants={springReveal} 
-              className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-300 sm:mb-6 sm:text-sm"
-            >
-              <Cctv size={18} className="text-primary" />
-            </motion.div>
-            
-            <motion.h1 
-              variants={springReveal} 
-              className="text-[2.2rem] font-extrabold uppercase leading-[1.05] text-white sm:text-5xl lg:text-[4.5rem]"
-            >
-              Advanced Security <br /> Solutions For Every <br /> Space
-            </motion.h1>
-            
-            {/* Hero description removed per request */}
-            
-            <motion.div 
-              variants={springReveal} 
-              className="mt-7 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:gap-6"
-            >
-              <Link 
-                href="/contact" 
-                className="group flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-bold text-white transition-all hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,62,71,0.4)] sm:w-auto"
-              >
-                Get Started Now 
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-              
-              {/* Watch Video button removed per request */}
-            </motion.div>
-          </div>
-
-          {/* Right Column: Provided Image */}
-          <motion.div 
-            variants={imageReveal}
-            className="relative hidden h-[600px] w-full lg:block"
+      {/* --- 1. FULL-BLEED BACKGROUND WITH INSTANT CROSSFADE --- */}
+      <div className="absolute inset-0 h-full w-full">
+        {/* Removed mode="wait" so images transition instantly without delay */}
+        <AnimatePresence>
+          <motion.div
+            key={active}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }} // Fast crossfade
+            className="absolute inset-0 h-full w-full"
           >
-            <Image 
-              src="/images/hero.png" 
-              alt="TechFin CCTV Equipment" 
+            <Image
+              src={slides[active].image}
+              alt={slides[active].title}
               fill
-              className="object-contain object-right drop-shadow-2xl" 
+              priority // Ensures the browser loads it immediately
+              className="object-cover"
             />
           </motion.div>
-        </motion.section>
+        </AnimatePresence>
+
+        {/* Dark overlay for perfect contrast */}
+        <div className="absolute inset-0 bg-black/40 z-0" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-black/80 pointer-events-none z-0" />
       </div>
 
-    
-      <div className="relative z-20 mx-auto -mt-16 w-full max-w-7xl px-4 sm:-mt-20 sm:px-6 lg:-mt-28 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
-          className="rounded-[2rem] border border-slate-200/80 bg-white p-5 shadow-[0_30px_60px_rgba(0,0,0,0.08)] sm:p-8 lg:w-4/5 lg:p-12"
-        >
-          <div className="grid grid-cols-3 gap-2 sm:gap-3 divide-x divide-slate-200/80 md:gap-0 md:divide-slate-200/80">
-            {features.map((feature, idx) => (
-              <div 
-                key={idx}
-                className="group flex flex-col items-center px-2 py-3 first:pl-0 last:pr-0 sm:py-4 md:items-start md:px-4 md:py-0 md:first:pl-0 md:last:pr-0"
-              >
-                <div className="mb-2 transition-transform duration-300 group-hover:-translate-y-1 sm:mb-3">
-                  {feature.icon}
+      {/* --- 2. CENTERED MAIN CONTENT --- */}
+      <div className="relative z-20 flex w-full flex-col items-center px-6 text-center -mt-10 md:-mt-20">
+        {/* We keep mode="wait" on the text so it doesn't overlap messily during rapid clicks */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={active}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }} // Sped up the text entrance
+            className="flex max-w-5xl flex-col items-center"
+          >
+            {/* Title with Tech Corner Brackets */}
+            <div className="relative mb-6 inline-block px-8 py-4 sm:px-12 sm:py-6">
+              <div className="absolute left-0 top-0 h-4 w-4 border-l-2 border-t-2 border-white/40 md:h-6 md:w-6" />
+              <div className="absolute bottom-0 right-0 h-4 w-4 border-b-2 border-r-2 border-white/40 md:h-6 md:w-6" />
+
+              <h1 className="text-4xl font-black uppercase tracking-[0.15em] text-white sm:text-6xl md:text-7xl lg:text-[7.5rem] leading-none drop-shadow-2xl">
+                {slides[active].title}
+              </h1>
+            </div>
+
+            <p className="mb-8 max-w-2xl text-xs font-medium leading-relaxed text-white/90 sm:text-sm md:text-base lg:text-lg">
+              {slides[active].description}
+            </p>
+
+            <Link
+              href={slides[active].href}
+              className="group relative flex items-center justify-center gap-3 overflow-hidden border border-white/50 bg-transparent px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white transition-all hover:border-white hover:bg-white hover:text-black md:px-10 md:py-4 md:text-xs"
+            >
+              <span className="relative z-10">Get a Free Quote</span>
+            </Link>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* --- 3. CIRCULAR SIDE NAVIGATION ARROWS --- */}
+      <div className="absolute left-2 top-1/2 z-20 -translate-y-1/2 md:left-6 lg:left-12">
+        <button onClick={prevSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
+          <ArrowLeft size={18} strokeWidth={1.5} />
+        </button>
+      </div>
+      <div className="absolute right-2 top-1/2 z-20 -translate-y-1/2 md:right-6 lg:right-12">
+        <button onClick={nextSlide} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
+          <ArrowRight size={18} strokeWidth={1.5} />
+        </button>
+      </div>
+
+      {/* --- 4. BOTTOM STATIC FEATURE DOCK --- */}
+      <div className="absolute bottom-0 left-0 z-30 w-full px-2 pb-6 pt-20 md:px-6 md:pb-10">
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl">
+          <div className="grid grid-cols-3 gap-y-6 gap-x-2 md:flex md:justify-between md:gap-4">
+            {bottomFeatures.map((item, idx) => (
+              <div key={idx} className="group flex flex-col items-center justify-center gap-3 transition-transform hover:-translate-y-1 cursor-pointer md:flex-1">
+                <div className="text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]">
+                  <div className="scale-90 md:scale-100">
+                    {item.icon}
+                  </div>
                 </div>
-                <h3 className="whitespace-pre-line text-center text-xs font-bold leading-tight text-slate-900 sm:text-sm md:text-left md:text-lg lg:text-xl">
-                  {feature.title}
-                </h3>
+                <span className="text-center text-[9px] font-black uppercase tracking-[0.15em] text-white/90 md:text-[10px] lg:text-[11px] lg:tracking-[0.2em]">
+                  {item.label}
+                </span>
               </div>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
 
-    </div>
+    </section>
   );
 }
