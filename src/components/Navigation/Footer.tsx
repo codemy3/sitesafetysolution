@@ -45,6 +45,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link href="/work" className="transition-colors hover:text-[#B8AD76]">
+                Selected Works
+              </Link>
+            </li>
+            <li>
               <Link href="/contact" className="transition-colors hover:text-[#B8AD76]">
                 Contact Support
               </Link>
@@ -82,7 +87,9 @@ export default function Footer() {
             <li className="flex items-start gap-3">
               <MapPin size={18} className="mt-0.5 shrink-0 text-[#B8AD76]" />
               <span className="text-slate-400">
-                20-3-253/72, Regal Plaza, 2nd Floor, Near Rao & Rao Circle, Mangaluru - 575001
+                Shakir Complex, Behind Hotel Nawfal<br />
+                1st Floor, Mission Street, Bunder<br />
+                Mangalore, Karnataka - 575001
               </span>
             </li>
             <li className="flex items-center gap-3">

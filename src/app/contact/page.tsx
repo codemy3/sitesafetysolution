@@ -13,8 +13,22 @@ import {
   Radio, 
   CheckCircle2 
 } from 'lucide-react';
+import { JetBrains_Mono } from 'next/font/google';
+
+const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '700'] });
 
 const services = ['Home Automation', 'CCTV Surveillance', 'Access Control', 'General Inquiry'];
+
+function ViewfinderCorners({ className = 'border-[#B8AD76]' }: { className?: string }) {
+  return (
+    <>
+      <span className={`pointer-events-none absolute left-0 top-0 h-4 w-4 sm:h-6 sm:w-6 border-l-2 border-t-2 ${className}`} />
+      <span className={`pointer-events-none absolute right-0 top-0 h-4 w-4 sm:h-6 sm:w-6 border-r-2 border-t-2 ${className}`} />
+      <span className={`pointer-events-none absolute bottom-0 left-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-l-2 ${className}`} />
+      <span className={`pointer-events-none absolute bottom-0 right-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-r-2 ${className}`} />
+    </>
+  );
+}
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: '', email: '', phone: '', service: '', message: '' });
@@ -56,38 +70,52 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[#fafafa] text-slate-800 selection:bg-[#B8AD76]/20 selection:text-slate-900">
       
       {/* ========================================== */}
-      {/* 1. TECHNICAL HERO SECTION */}
+      {/* 1. CINEMATIC HERO SECTION (Dark Edition)   */}
       {/* ========================================== */}
-      <section className="relative overflow-hidden bg-white pb-16 pt-32 sm:pb-24 sm:pt-40 border-b border-slate-200">
-        {/* Architectural Grid Background */}
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#B8AD76]/10 via-transparent to-transparent" />
+      <section className="relative overflow-hidden bg-[#0f3b43] pb-24 pt-32 sm:pb-36 sm:pt-40">
+        {/* Abstract Background Overlay */}
+        <div className="absolute inset-0 z-0 bg-[url('/images/hero-background.png')] bg-cover bg-center opacity-10 mix-blend-overlay pointer-events-none" />
         
-        {/* Corner HUD Framing Brackets */}
-        <div className="absolute top-6 left-6 w-8 h-8 border-t-2 border-l-2 border-[#B8AD76]/40 pointer-events-none hidden sm:block" />
-        <div className="absolute top-6 right-6 w-8 h-8 border-t-2 border-r-2 border-[#B8AD76]/40 pointer-events-none hidden sm:block" />
+        {/* Subtle grid and glows */}
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#B8AD76]/20 via-[#0f3b43]/0 to-[#0f3b43]/0 pointer-events-none" />
+        
+        {/* Technical HUD Elements */}
+        <div className={`${mono.className} absolute left-6 top-6 hidden items-center gap-4 text-[10px] uppercase tracking-widest text-white/50 sm:flex`}>
+          <span>TCF-CONTACT // 2026</span>
+          <span className="h-px w-8 bg-white/20" />
+          <span className="flex items-center gap-2 text-[#B8AD76]"><Activity size={12} className="animate-pulse" /> LIVE</span>
+        </div>
+
+        <ViewfinderCorners className="border-[#B8AD76]/40 hidden sm:block m-6" />
         
         <div className="relative z-10 mx-auto max-w-[1400px] px-4 text-center sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mx-auto max-w-3xl"
+            className="mx-auto max-w-4xl"
           >
-            {/* Badge */}
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#B8AD76]/30 bg-[#B8AD76]/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-slate-700 shadow-sm backdrop-blur-md">
+            <div className={`${mono.className} mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-slate-300 shadow-sm backdrop-blur-md`}>
               <ShieldCheck size={16} className="text-[#B8AD76]" />
               <span>Priority Support</span>
             </div>
             
-            <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-6xl lg:text-7xl">
-              Get In <span className="underline decoration-[#B8AD76]/40 decoration-wavy decoration-2 underline-offset-8">Touch</span>
+            <h1 className="text-5xl font-black uppercase tracking-tighter text-white sm:text-7xl lg:text-[7.5rem] leading-none">
+              Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B8AD76] to-white/70">Touch</span>
             </h1>
             
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-500 sm:text-xl sm:leading-relaxed font-light">
+            <p className="mx-auto mt-8 max-w-2xl text-base text-slate-400 sm:text-xl font-light">
               Send us a message for CCTV, access control, or home automation deployment and regional support.
             </p>
           </motion.div>
+        </div>
+
+        {/* Diagonal Shape Divider for Creative Separation */}
+        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
+          <svg className="relative block w-full h-[40px] sm:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M1200 120L0 16.48V120h1200z" className="fill-[#fafafa]"></path>
+          </svg>
         </div>
       </section>
 
@@ -245,10 +273,10 @@ export default function ContactPage() {
                   <div>
                     <div className="flex items-center gap-2 text-[11px] font-mono text-[#B8AD76] uppercase tracking-wider">
                       <Radio size={14} />
-                      <span>HQ Telemetry</span>
+                      <span>Main Office</span>
                     </div>
                     <h2 className="text-2xl font-bold tracking-tight text-white mt-1">
-                      Command Center
+                      Contact Information
                     </h2>
                   </div>
                   <span className="text-xs font-mono text-slate-400">[MANGALURU]</span>

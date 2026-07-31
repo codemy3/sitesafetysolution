@@ -33,10 +33,10 @@ const catalogData = [
   { id: "HA-07", category: "Home Automation", title: "Public Address", desc: "Deliver clear and effective communication across wide areas, making them ideal for offices, schools, events, and commercial spaces.", img: "/images/indoor.jpg" },
 
   // Smart Systems
-  { id: "SS-01", category: "Smart Systems", title: "Video Door Phones", desc: "See and talk to visitors before granting access, enhancing both security and convenience at your doorstep.", img: "/images/about1.jpg" },
-  { id: "SS-02", category: "Smart Systems", title: "Visitor Entry Systems", desc: "Provide secure and hassle-free access management, allowing you to monitor, verify, and record visitors for enhanced safety and control.", img: "/images/about2.jpg" },
+  { id: "SS-01", category: "Smart Systems", title: "Video Door Phones", desc: "See and talk to visitors before granting access, enhancing both security and convenience at your doorstep.", img: "/images/video-door.jpg" },
+  { id: "SS-02", category: "Smart Systems", title: "Visitor Entry Systems", desc: "Provide secure and hassle-free access management, allowing you to monitor, verify, and record visitors for enhanced safety and control.", img: "/images/visitor-entry-system.jpg" },
   { id: "SS-03", category: "Smart Systems", title: "Smart Cloud AI", desc: "Intelligent cloud-based technology to analyze data in real time, offering advanced security, remote monitoring, and smarter decision-making.", img: "/images/about3.jpg" },
-  { id: "SS-04", category: "Smart Systems", title: "Boom Barriers", desc: "Controlled vehicle access at entrances and exits, ensuring security, smooth traffic management, and authorized entry.", img: "/images/outdoor.jpg" },
+  { id: "SS-04", category: "Smart Systems", title: "Boom Barriers", desc: "Controlled vehicle access at entrances and exits, ensuring security, smooth traffic management, and authorized entry.", img: "/images/boom-barriers.png" },
   { id: "SS-05", category: "Smart Systems", title: "Biometric System", desc: "Use fingerprints, facial recognition, or iris scans to provide secure, keyless access and accurate identity verification.", img: "/images/biometric-system.png" },
 
   // Surveillance Cameras
@@ -84,16 +84,20 @@ export default function ModernProductsPage() {
     <main className="min-h-screen bg-slate-50 text-slate-900 selection:bg-[#B8AD76]/20 selection:text-slate-900">
       
       {/* ========================================== */}
-      {/* 1. CINEMATIC HERO SECTION (Light Edition)  */}
+      {/* 1. CINEMATIC HERO SECTION (Dark Edition)   */}
       {/* ========================================== */}
-      <section className="relative overflow-hidden bg-white pb-16 pt-32 sm:pb-24 sm:pt-40 border-b border-slate-200">
-        <GridPattern />
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#B8AD76]/10 via-transparent to-transparent pointer-events-none" />
+      <section className="relative overflow-hidden bg-[#0f3b43] pb-24 pt-32 sm:pb-36 sm:pt-40">
+        {/* Abstract Background Overlay */}
+        <div className="absolute inset-0 z-0 bg-[url('/images/hero-background.png')] bg-cover bg-center opacity-10 mix-blend-overlay pointer-events-none" />
+        
+        {/* Subtle grid and glows */}
+        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#B8AD76]/20 via-[#0f3b43]/0 to-[#0f3b43]/0 pointer-events-none" />
         
         {/* Technical HUD Elements */}
-        <div className={`${mono.className} absolute left-6 top-6 hidden items-center gap-4 text-[10px] uppercase tracking-widest text-slate-400 sm:flex`}>
+        <div className={`${mono.className} absolute left-6 top-6 hidden items-center gap-4 text-[10px] uppercase tracking-widest text-white/50 sm:flex`}>
           <span>TCF-CATALOG // 2026</span>
-          <span className="h-px w-8 bg-slate-300" />
+          <span className="h-px w-8 bg-white/20" />
           <span className="flex items-center gap-2 text-[#B8AD76]"><Activity size={12} className="animate-pulse" /> LIVE</span>
         </div>
 
@@ -106,19 +110,26 @@ export default function ModernProductsPage() {
             transition={{ duration: 0.6 }}
             className="mx-auto max-w-4xl"
           >
-            <div className={`${mono.className} mb-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/80 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-slate-600 shadow-sm backdrop-blur-md`}>
+            <div className={`${mono.className} mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-slate-300 shadow-sm backdrop-blur-md`}>
               <ShieldCheck size={16} className="text-[#B8AD76]" />
               <span>Complete Ecosystem</span>
             </div>
             
-            <h1 className="text-5xl font-black uppercase tracking-tighter text-slate-900 sm:text-7xl lg:text-[7.5rem] leading-none">
-              Products & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B8AD76] to-slate-400">Services</span>
+            <h1 className="text-5xl font-black uppercase tracking-tighter text-white sm:text-7xl lg:text-[7.5rem] leading-none">
+              Products & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B8AD76] to-white/70">Services</span>
             </h1>
             
-            <p className="mx-auto mt-8 max-w-2xl text-base text-slate-500 sm:text-xl font-light">
+            <p className="mx-auto mt-8 max-w-2xl text-base text-slate-400 sm:text-xl font-light">
               Explore our comprehensive range of high-performance surveillance systems, smart access control, and intelligent home automation hardware.
             </p>
           </motion.div>
+        </div>
+
+        {/* Diagonal Shape Divider for Creative Separation */}
+        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
+          <svg className="relative block w-full h-[40px] sm:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M1200 120L0 16.48V120h1200z" className="fill-slate-50"></path>
+          </svg>
         </div>
       </section>
 
@@ -130,27 +141,6 @@ export default function ModernProductsPage() {
           
           {categories.map((category, idx) => {
             const categoryProducts = catalogData.filter(item => item.category === category);
-            
-            let featuredProject = null;
-            if (category === 'Home Automation') {
-              featuredProject = {
-                title: "Harborpoint Factory",
-                image: "/images/about3.jpg",
-                tag: "Industrial Facility"
-              };
-            } else if (category === 'Smart Systems') {
-              featuredProject = {
-                title: "Coastal View",
-                image: "/images/visitor-entry-system.jpg",
-                tag: "Residential Complex"
-              };
-            } else if (category === 'Surveillance Cameras') {
-              featuredProject = {
-                title: "Sagar Auditorium",
-                image: "/images/sagar.jpeg",
-                tag: "Public Infrastructure"
-              };
-            }
             
             return (
               <div key={category} id={category.toLowerCase().replace(/\s+/g, '-')} className="mb-24 flex flex-col gap-12 lg:mb-40 lg:flex-row lg:gap-16 border-t border-slate-200 pt-16 lg:pt-24 first:border-0 first:pt-0 scroll-mt-32">
@@ -173,72 +163,6 @@ export default function ModernProductsPage() {
                 {/* RIGHT: Product Grid */}
                 <div className="grid gap-6 sm:grid-cols-2 lg:w-2/3 xl:gap-8">
                   
-                  {/* --- FEATURED DEPLOYMENT INJECTED --- */}
-                  {featuredProject && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      className="group relative overflow-hidden rounded-[2rem] bg-slate-900 shadow-2xl shadow-slate-900/30 sm:col-span-2"
-                    >
-                      {/* Subtle grid background */}
-                      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:3rem_3rem] opacity-30 pointer-events-none" />
-                      
-                      {/* Corner brackets */}
-                      <span className="pointer-events-none absolute left-4 top-4 h-5 w-5 border-l-2 border-t-2 border-[#B8AD76]/60 z-20" />
-                      <span className="pointer-events-none absolute right-4 top-4 h-5 w-5 border-r-2 border-t-2 border-[#B8AD76]/60 z-20" />
-                      <span className="pointer-events-none absolute bottom-4 left-4 h-5 w-5 border-b-2 border-l-2 border-[#B8AD76]/60 z-20" />
-                      <span className="pointer-events-none absolute bottom-4 right-4 h-5 w-5 border-b-2 border-r-2 border-[#B8AD76]/60 z-20" />
-
-                      <div className="relative z-10 flex flex-col md:flex-row">
-                        <div className="relative h-[260px] w-full shrink-0 overflow-hidden md:h-auto md:w-1/2">
-                          <Image src={featuredProject.image} alt={featuredProject.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-transparent to-slate-900/60 md:bg-gradient-to-r md:from-transparent md:via-transparent md:to-slate-900" />
-                          
-                          <div className="absolute left-5 top-5 rounded-full border border-[#B8AD76]/40 bg-[#B8AD76]/20 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-widest text-[#B8AD76] backdrop-blur-md shadow-lg flex items-center gap-1.5">
-                            <span className="relative flex h-1.5 w-1.5">
-                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B8AD76] opacity-75" />
-                              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#B8AD76]" />
-                            </span>
-                            Case Study
-                          </div>
-                        </div>
-                        
-                        <div className="flex w-full flex-col justify-center p-7 sm:p-10 md:w-1/2 md:p-12">
-                          <div className="mb-4 inline-flex items-center gap-2">
-                            <Activity size={14} className="text-[#B8AD76]" />
-                            <span className={`${mono.className} text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#B8AD76]`}>
-                              {featuredProject.tag}
-                            </span>
-                          </div>
-                          <h3 className="mb-3 text-2xl font-black uppercase tracking-tight text-white sm:text-3xl">
-                            {featuredProject.title}
-                          </h3>
-                          <p className="mb-8 text-sm font-light leading-relaxed text-slate-400">
-                            A prime example of our {category.toLowerCase()} deployed in a real-world scenario, offering unparalleled reliability and control for complex environments.
-                          </p>
-                          
-                          <div className="flex items-center justify-between border-t border-slate-700/60 pt-6">
-                             <div className="flex items-center gap-4 sm:gap-6">
-                               <div className="flex flex-col">
-                                 <span className={`${mono.className} text-lg sm:text-xl font-bold text-white`}>100%</span>
-                                 <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-500">Success</span>
-                               </div>
-                               <div className="h-8 w-px bg-slate-700" />
-                               <div className="flex flex-col">
-                                 <span className={`${mono.className} text-lg sm:text-xl font-bold text-white`}>24/7</span>
-                                 <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-slate-500">Active</span>
-                               </div>
-                             </div>
-                             
-                             <Link href="/contact" className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-[#B8AD76] text-slate-900 shadow-lg shadow-[#B8AD76]/20 transition-all hover:scale-110 hover:shadow-[#B8AD76]/40">
-                               <ArrowUpRight size={18} className="sm:h-5 sm:w-5" />
-                             </Link>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
 
                   {categoryProducts.map((product, pIdx) => (
                     <motion.div

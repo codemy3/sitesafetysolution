@@ -25,6 +25,7 @@ const navItems: NavItem[] = [
   },
   { href: '/about', label: 'About Us' },
   { href: '/services', label: 'Services' },
+  { href: '/work', label: 'Work' },
   { href: '/contact', label: 'Contact Us' }
 ];
 
@@ -43,7 +44,14 @@ export default function Navbar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-slate-200/80 bg-white/95 px-3 py-2.5 shadow-[0_10px_35px_rgba(15,23,42,0.12)] backdrop-blur sm:px-6 sm:py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
-          <Image src="/images/logo.png" alt="TechFin Enterprises" width={176} height={72} className="h-9 w-auto sm:h-12" priority />
+          {/* Desktop Logo */}
+          <div className="hidden sm:block">
+            <Image src="/images/logo.png" alt="TechFin Enterprises" width={176} height={72} className="h-12 w-auto" priority />
+          </div>
+          {/* Mobile Logo */}
+          <div className="block sm:hidden">
+            <Image src="/images/logo-mobile.png" alt="TechFin Enterprises" width={176} height={72} className="h-9 w-auto" priority />
+          </div>
         </Link>
 
         {/* Desktop Links */}
