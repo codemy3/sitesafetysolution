@@ -78,7 +78,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }} // Fast crossfade
+            transition={{ duration: 0.4 }} 
             className="absolute inset-0 h-full w-full"
           >
             {(slides as any)[active].imageMobile ? (
