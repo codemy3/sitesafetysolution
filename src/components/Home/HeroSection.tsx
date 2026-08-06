@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, Cctv, Cpu, Fingerprint, DoorOpen, Video, BellRing } from "lucide-react";
+import { ArrowRight, ArrowLeft, Cctv, Home, Fingerprint, Lock, Video, BellRing } from "lucide-react";
 
 const slides = [
   {
@@ -12,7 +12,7 @@ const slides = [
     title: "Surveillance",
     subtitle: "AI-Powered Threat Detection",
     description: "Enterprise-grade monitoring systems with real-time analytics and predictive threat assessment designed to provide 24/7 surveillance and peace of mind.",
-    image: "/images/hero1.png", // Replace with your image
+    image: "/images/hero1.png",
     href: "/services#surveillance",
   },
   {
@@ -44,14 +44,14 @@ const slides = [
 
 const bottomFeatures = [
   { label: "SURVEILLANCE", icon: <Cctv size={56} strokeWidth={1.5} /> },
-  { label: "HOME AUTOMATION", icon: <Cpu size={56} strokeWidth={1.5} /> },
+  { label: "HOME AUTOMATION", icon: <Home size={56} strokeWidth={1.5} /> },
   { label: "ACCESS CONTROL", icon: <Fingerprint size={56} strokeWidth={1.5} /> },
-  { label: "GATE AUTOMATION", icon: <DoorOpen size={56} strokeWidth={1.5} /> },
+  { label: "GATE AUTOMATION", icon: <Lock size={56} strokeWidth={1.5} /> },
   { label: "VIDEO DOOR PHONES", icon: <Video size={56} strokeWidth={1.5} /> },
   { label: "INTRUSION ALARMS", icon: <BellRing size={56} strokeWidth={1.5} /> }
 ];
 
-const SLIDE_DURATION = 6000;
+const SLIDE_DURATION = 2000;
 
 export default function HeroSection() {
   const [active, setActive] = useState(0);
