@@ -3,6 +3,7 @@
 import HeroSection from '@/components/Home/HeroSection';
 import HomeAboutSection from '@/components/Home/HomeAboutSection';
 import ServicesOverview from '@/components/Home/ServicesOverview';
+import SolarInstallationSection from '@/components/Home/SolarInstallationSection';
 import ModernTechSection from '@/components/Home/WhyChooseUs';
 import IntelligenceSection from '@/components/Home/IntelligenceSection';
 import ClientsSection from '@/components/Home/ClientsSection';
@@ -13,7 +14,9 @@ export default function HomePage() {
     <main className="overflow-hidden">
       <HeroSection />
       <HomeAboutSection />
+      
       <ServicesOverview />
+      <SolarInstallationSection />
       <ModernTechSection />
       <IntelligenceSection />
       <ClientsSection />
