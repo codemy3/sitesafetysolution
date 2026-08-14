@@ -95,7 +95,7 @@ export default function EditorialClientsSection() {
   }, []);
 
   return (
-    <section className="bg-slate-50 py-16 sm:py-24 lg:py-32 overflow-hidden selection:bg-[#B8AD76]/30 selection:text-[#0f3b43]">
+    <section className="bg-slate-50 pt-10 pb-16 sm:pt-16 sm:pb-24 lg:pt-16 lg:pb-32 overflow-hidden selection:bg-[#B8AD76]/30 selection:text-[#0f3b43]">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
         
         {/* --- HEADER --- */}
