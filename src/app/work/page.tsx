@@ -33,11 +33,10 @@ const projects = [
     id: "PRJ-02",
     title: "Coastal View",
     category: "Residential Complex",
-    description: "Complete smart systems integration including video door phones and automated visitor entry for a luxury 40-unit building.",
+    description: "Complete smart systems integration including video door phones and automated visitor entry for 40 units.",
     image: "/images/coastal_view.png",
     stats: [
-      { label: "Units", value: "40" },
-      { label: "Response", value: "<1s" }
+      { label: "Units", value: "40" }
     ],
     colSpan: "col-span-12 lg:col-span-4",
     height: "h-[400px] sm:h-[600px]",
