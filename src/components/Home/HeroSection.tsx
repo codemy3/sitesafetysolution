@@ -42,11 +42,37 @@ const slides = [
   }
 ];
 
+const GateAutomationIcon = ({ size = 56, strokeWidth = 1.5 }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={strokeWidth}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M8.5 4a5 5 0 0 1 7 0" />
+    <path d="M10 6.5a2.5 2.5 0 0 1 4 0" />
+    <path d="M12 9v.01" />
+    <path d="M4 22V10" />
+    <path d="M4 12c2-2 4-2 7 0v10H4" />
+    <path d="M7 12.5V22" />
+    <path d="M20 22V10" />
+    <path d="M20 12c-2-2-4-2-7 0v10h7" />
+    <path d="M17 12.5V22" />
+    <path d="M4 16h7" />
+    <path d="M20 16h-7" />
+  </svg>
+);
+
 const bottomFeatures = [
   { label: "SURVEILLANCE", icon: <Cctv size={56} strokeWidth={1.5} /> },
   { label: "HOME AUTOMATION", icon: <Home size={56} strokeWidth={1.5} /> },
   { label: "ACCESS CONTROL", icon: <Fingerprint size={56} strokeWidth={1.5} /> },
-  { label: "GATE AUTOMATION", icon: <Lock size={56} strokeWidth={1.5} /> },
+  { label: "GATE AUTOMATION", icon: <GateAutomationIcon size={56} strokeWidth={1.5} /> },
   { label: "VIDEO DOOR PHONES", icon: <Video size={56} strokeWidth={1.5} /> },
   { label: "INTRUSION ALARMS", icon: <BellRing size={56} strokeWidth={1.5} /> }
 ];

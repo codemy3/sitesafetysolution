@@ -59,7 +59,7 @@ const fadeUp = {
 
 export default function ModernTechSection() {
   return (
-    <section className="relative overflow-hidden bg-[#0B0F0D] py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-[#0B0F0D] pb-20 pt-10 sm:pb-28 sm:pt-16">
       
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 pointer-events-none" />
@@ -69,22 +69,44 @@ export default function ModernTechSection() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Top Section: Video + Intro */}
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center mb-16 sm:mb-24">
+        {/* Top Section: Heading + Full Width Video */}
+        <div className="mb-16 sm:mb-24 flex flex-col items-center text-center">
           
-          {/* Left: Video Showcase */}
+          {/* Heading Content */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative"
+            className="mb-8 w-full max-w-5xl"
+          >
+            <div className="mb-4 flex items-center justify-center gap-2 text-xs font-mono tracking-[0.2em] text-[#B8AD76] uppercase">
+              <Activity size={14} className="animate-pulse" />
+              <span>SMART LIVING // HOME AUTOMATION</span>
+            </div>
+
+            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl lg:whitespace-nowrap">
+              Transform Your Space With{' '}
+              <span className="relative inline-block">
+                <span className="relative z-10 text-[#B8AD76]">Modern Technology</span>
+                <span className="absolute bottom-1 left-0 right-0 h-3 bg-[#B8AD76]/10 z-0 rounded" />
+              </span>
+            </h2>
+          </motion.div>
+
+          {/* Centered Video Showcase (Restoring Original Style) */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="relative w-full max-w-4xl mx-auto"
           >
             {/* Corner brackets */}
             <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-[#B8AD76]/60 pointer-events-none hidden sm:block z-20" />
             <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-[#B8AD76]/60 pointer-events-none hidden sm:block z-20" />
 
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-700/50 bg-slate-900 p-2 sm:p-3 shadow-2xl shadow-black/40">
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-700/50 bg-slate-900 p-2 sm:p-3 shadow-2xl shadow-black/40 transition-all duration-500 hover:shadow-[0_0_50px_rgba(184,173,118,0.15)] hover:border-[#B8AD76]/40">
               <div className="relative overflow-hidden rounded-[1.5rem]">
                 <video
                   src="/morden-tech.mp4"
@@ -92,7 +114,7 @@ export default function ModernTechSection() {
                   muted
                   loop
                   playsInline
-                  className="h-72 w-full object-cover sm:h-[420px]"
+                  className="h-72 w-full object-cover sm:h-[420px] lg:h-[500px]"
                 />
                 {/* Floating overlay label */}
                 <div className="absolute top-4 left-4 rounded-full border border-white/10 bg-black/60 px-3.5 py-1.5 text-[11px] font-mono tracking-wider text-white backdrop-blur-md flex items-center gap-2 shadow-lg">
@@ -102,62 +124,6 @@ export default function ModernTechSection() {
                   </span>
                   <span>LIVE DEMO</span>
                 </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right: Intro Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="mb-4 flex items-center gap-2 text-xs font-mono tracking-[0.2em] text-[#B8AD76] uppercase">
-              <Activity size={14} className="animate-pulse" />
-              <span>SMART LIVING // HOME AUTOMATION</span>
-            </div>
-
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">
-              Transform Your Space With{' '}
-              <span className="relative">
-                <span className="relative z-10 text-[#B8AD76]">Modern Technology</span>
-                <span className="absolute bottom-1 left-0 right-0 h-3 bg-[#B8AD76]/10 z-0 rounded" />
-              </span>
-            </h2>
-
-            <p className="mt-5 text-base leading-relaxed text-slate-400 sm:text-lg font-light">
-              From automatic curtains that glide at your command to smart lighting that adapts to your mood — we bring cutting-edge home automation to Mangaluru and beyond. Experience the future of living, today.
-            </p>
-
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <Link 
-                href="/services" 
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-[#B8AD76] px-8 py-4 text-sm font-bold text-[#0B0F0D] transition-all hover:bg-white hover:shadow-lg hover:shadow-[#B8AD76]/20"
-              >
-                Explore All Services
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-              </Link>
-              <Link
-                href="/contact"
-                className="group inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-slate-600 px-8 py-4 text-sm font-bold text-white transition-all hover:border-[#B8AD76] hover:text-[#B8AD76]"
-              >
-                Get a Quote
-              </Link>
-            </div>
-
-            {/* Stats row */}
-            <div className="mt-10 flex items-center gap-8 border-t border-slate-800 pt-6">
-              
-              <div className="h-10 w-px bg-slate-800" />
-              <div>
-                <p className="text-2xl font-black text-white sm:text-3xl">15+</p>
-                <p className="text-xs font-mono uppercase tracking-wider text-slate-500">Years Expert</p>
-              </div>
-              <div className="h-10 w-px bg-slate-800" />
-              <div>
-                <p className="text-2xl font-black text-white sm:text-3xl">24/7</p>
-                <p className="text-xs font-mono uppercase tracking-wider text-slate-500">Support</p>
               </div>
             </div>
           </motion.div>

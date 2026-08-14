@@ -17,9 +17,9 @@ export default function HomePage() {
       
       <ServicesOverview />
       <SolarInstallationSection />
+      <ClientsSection />
       <ModernTechSection />
       <IntelligenceSection />
-      <ClientsSection />
       <CTASection />
     </main>
   );

@@ -32,7 +32,16 @@ const navItems: NavItem[] = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Auto-close mobile menu on route change
   useEffect(() => {
@@ -41,7 +50,11 @@ export default function Navbar() {
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 px-2 pt-3 sm:px-6 sm:pt-6 lg:px-8">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-slate-200/80 bg-white/95 px-3 py-2.5 shadow-[0_10px_35px_rgba(15,23,42,0.12)] backdrop-blur sm:px-6 sm:py-3">
+      <nav className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-3 py-2.5 transition-all duration-300 sm:px-6 sm:py-3 ${
+        scrolled 
+          ? 'border-white/50 bg-white/70 shadow-[0_8px_32px_rgba(0,0,0,0.08)] backdrop-blur-lg' 
+          : 'border-white/20 bg-white/10 shadow-none backdrop-blur-sm'
+      }`}>
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2">
           {/* Desktop Logo */}
@@ -65,8 +78,10 @@ export default function Navbar() {
             >
               <Link 
                 href={item.href} 
-                className={`group flex items-center gap-1 py-4 text-sm font-semibold transition hover:text-primary ${
-                  pathname === item.href ? 'text-primary' : 'text-slate-700'
+                className={`group flex items-center gap-1 py-4 text-sm font-semibold transition ${
+                  pathname === item.href 
+                    ? 'text-primary' 
+                    : scrolled ? 'text-slate-800 hover:text-primary' : 'text-white hover:text-white/80'
                 }`}
               >
                 {item.label}
@@ -88,13 +103,17 @@ export default function Navbar() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="absolute left-0 top-full w-52 rounded-xl border border-slate-100 bg-white p-2 shadow-xl"
+                      className={`absolute left-0 top-full w-52 rounded-xl border p-2 shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-xl transition-colors ${
+                        scrolled ? 'border-white/50 bg-white/80' : 'border-white/20 bg-black/40'
+                      }`}
                     >
                       {item.dropdown?.map((dropItem: DropdownItem) => (
                         <Link
                           key={dropItem.label}
                           href={dropItem.href}
-                          className="block rounded-lg px-4 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-primary"
+                          className={`block rounded-lg px-4 py-2.5 text-sm font-medium transition ${
+                            scrolled ? 'text-slate-700 hover:bg-slate-100/50 hover:text-primary' : 'text-white hover:bg-white/20 hover:text-white'
+                          }`}
                         >
                           {dropItem.label}
                         </Link>
@@ -118,7 +137,9 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/5 p-2 text-slate-900 transition hover:bg-slate-900 hover:text-white lg:hidden" onClick={() => setOpen(!open)}>
+        <button className={`flex h-10 w-10 items-center justify-center rounded-full p-2 transition lg:hidden ${
+          scrolled ? 'bg-slate-100 text-slate-800 hover:bg-slate-200' : 'bg-white/10 text-white hover:bg-white/20'
+        }`} onClick={() => setOpen(!open)}>
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
@@ -143,15 +164,19 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.15 }}
-              className="absolute left-2 right-2 top-16 z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[1.5rem] border border-slate-200/80 bg-white p-4 shadow-[0_18px_45px_rgba(15,23,42,0.16)] sm:left-4 sm:right-4 lg:hidden"
+              className={`absolute left-2 right-2 top-16 z-50 max-h-[calc(100vh-5.5rem)] overflow-y-auto rounded-[1.5rem] border p-4 shadow-[0_8px_32px_rgba(0,0,0,0.1)] backdrop-blur-xl sm:left-4 sm:right-4 lg:hidden ${
+                scrolled ? 'border-white/50 bg-white/90' : 'border-white/20 bg-black/60'
+              }`}
             >
               <div className="flex flex-col gap-2">
                 {navItems.map((item) => (
                   <div key={item.label} className="flex flex-col">
                     <Link 
                       href={item.href} 
-                      className={`flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium hover:bg-slate-50 ${
-                        pathname === item.href ? 'text-primary bg-slate-50' : 'text-slate-800'
+                      className={`flex items-center justify-between rounded-lg px-4 py-3 text-sm font-medium transition-colors ${
+                        pathname === item.href 
+                          ? scrolled ? 'text-primary bg-slate-100' : 'text-primary bg-white/10' 
+                          : scrolled ? 'text-slate-800 hover:bg-slate-100' : 'text-white hover:bg-white/10'
                       }`}
                       onClick={() => setOpen(false)}
                     >
@@ -164,7 +189,9 @@ export default function Navbar() {
                           <Link
                             key={dropItem.label}
                             href={dropItem.href}
-                            className="block rounded-lg py-2 text-sm font-medium text-slate-500 hover:text-primary"
+                            className={`block rounded-lg py-2 text-sm font-medium ${
+                              scrolled ? 'text-slate-600 hover:text-primary' : 'text-white/80 hover:text-white'
+                            }`}
                             onClick={() => setOpen(false)}
                           >
                             {dropItem.label}

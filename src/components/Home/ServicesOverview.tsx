@@ -43,7 +43,6 @@ const accessData = [
   { id: 'AC-05', title: 'Visitor Entry', description: 'Streamline guest access and maintain detailed entry logs effortlessly.', image: '/images/visitor-entry-system.jpg' },
   { id: 'AC-06', title: 'Public Address', description: 'Clear and reliable public address systems for announcements and emergency broadcasts.', image: '/images/public-address.png' },
 ];
-
 // ==========================================
 // 2. REUSABLE CAROUSEL COMPONENT
 // ==========================================
@@ -68,11 +67,14 @@ const FannedCarouselSection = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Auto-rotation (1.8 seconds) — never pauses
+  // Decreased from 2.5 to 1.5 to make it faster
+  const ROTATION_SPEED = 1.5;
+
+  // Auto-rotation matches the animation duration exactly to create a continuous flow
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex + 1) % items.length);
-    }, 1800);
+    }, ROTATION_SPEED * 1000);
     return () => clearInterval(interval);
   }, [items.length]);
 
@@ -107,14 +109,14 @@ const FannedCarouselSection = ({
         </div>
 
         {/* Carousel Area (Always Moving) */}
-        <div
-          className="relative flex flex-col items-center"
-        >
+        <div className="relative flex flex-col items-center">
           <div className="relative my-6 flex h-[320px] w-full items-center justify-center sm:my-10 sm:h-[420px] lg:h-[500px]">
             <AnimatePresence mode="popLayout">
               {items.map((item, index) => {
                 const total = items.length;
                 let offset = index - activeIndex;
+                
+                // Wrap the cards around cleanly
                 if (offset > total / 2) offset -= total;
                 if (offset < -total / 2) offset += total;
 
@@ -139,17 +141,23 @@ const FannedCarouselSection = ({
                       scale: scale,
                       zIndex: zIndex,
                     }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1 }}
-                    className={`absolute h-[280px] w-[200px] cursor-pointer overflow-hidden rounded-[1.5rem] bg-white transition-all duration-500 sm:h-[340px] sm:w-[250px] lg:h-[440px] lg:w-[310px] sm:rounded-[2rem] ${isCenter
+                    // Smooth, continuous linear motion synchronized with the interval
+                    transition={{
+                      type: "tween",
+                      ease: "linear",
+                      duration: ROTATION_SPEED,
+                    }}
+                    className={`absolute h-[280px] w-[200px] cursor-pointer overflow-hidden rounded-[1.5rem] bg-white sm:h-[340px] sm:w-[250px] lg:h-[440px] lg:w-[310px] sm:rounded-[2rem] ${
+                      isCenter
                         ? 'shadow-[0_25px_60px_-15px_rgba(184,173,118,0.5)] ring-2 ring-[#B8AD76]'
                         : `shadow-2xl ring-1 ${isBlue ? 'ring-white/10' : 'ring-slate-200/80'} hover:ring-[#B8AD76]/50`
-                      }`}
+                    }`}
                   >
                     <Image
                       src={item.image}
                       alt={item.title}
                       fill
-                      className={`object-cover transition-all duration-700 ${isCenter ? 'scale-100 brightness-100' : 'scale-110 brightness-40'}`}
+                      className={`object-cover transition-all duration-500 ${isCenter ? 'brightness-100' : 'brightness-40'}`}
                     />
 
                     <div className={`absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent transition-opacity duration-300 ${isCenter ? 'opacity-100' : 'opacity-0'}`} />
@@ -176,7 +184,8 @@ const FannedCarouselSection = ({
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -5 }}
-                transition={{ duration: 0.15 }}
+                // Sped up the text transition slightly to match the faster card rotation
+                transition={{ duration: 0.1 }}
                 className={`rounded-xl sm:rounded-2xl border p-3 sm:p-4 ${descBoxBg}`}
               >
                 <p className="text-xs sm:text-sm font-light leading-relaxed sm:text-base">
@@ -188,11 +197,10 @@ const FannedCarouselSection = ({
             {/* View All Link */}
             <Link
               href={linkTo}
-              className={`mt-4 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-300 ${
-                isBlue
+              className={`mt-4 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-300 ${isBlue
                   ? 'border border-white/20 text-white hover:bg-white/10 hover:border-[#B8AD76]'
                   : 'border border-slate-200 text-slate-700 hover:bg-slate-100 hover:border-[#B8AD76]'
-              }`}
+                }`}
             >
               View All <ArrowRight size={14} />
             </Link>
@@ -203,7 +211,6 @@ const FannedCarouselSection = ({
     </section>
   );
 };
-
 // ==========================================
 // 3. MAIN EXPORT COMPONENT
 // ==========================================
@@ -223,19 +230,7 @@ export default function AutoCarouselAndCards() {
   return (
     <div className="w-full">
 
-      {/* SECTION 1: SURVEILLANCE (Light Theme) */}
-      <FannedCarouselSection
-        titlePrefix="Surveillance"
-        titleHighlight="Cameras"
-        badgeText="OPTICAL SURVEILLANCE // ACTIVE MATRIX"
-        BadgeIcon={Activity}
-        items={surveillanceData}
-        isMobile={isMobile}
-        theme="light"
-        linkTo="/services#surveillance-cameras"
-      />
-
-      {/* SECTION 2: HOME AUTOMATION (Brand Blue Theme) */}
+      {/* SECTION 1: HOME AUTOMATION (Brand Blue Theme) */}
       <FannedCarouselSection
         titlePrefix="Home"
         titleHighlight="Automation"
@@ -245,6 +240,18 @@ export default function AutoCarouselAndCards() {
         isMobile={isMobile}
         theme="brand-blue"
         linkTo="/services#home-automation"
+      />
+
+      {/* SECTION 2: SURVEILLANCE (Light Theme) */}
+      <FannedCarouselSection
+        titlePrefix="Surveillance"
+        titleHighlight="Cameras"
+        badgeText="OPTICAL SURVEILLANCE // ACTIVE MATRIX"
+        BadgeIcon={Activity}
+        items={surveillanceData}
+        isMobile={isMobile}
+        theme="light"
+        linkTo="/services#surveillance-cameras"
       />
 
       {/* SECTION 3: ACCESS & SECURITY (Light Theme) */}
