@@ -3,13 +3,13 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/Navigation/Navbar';
 import Footer from '@/components/Navigation/Footer';
-import FloatingWhatsApp from '@/components/Navigation/FloatingWhatsApp';
+import ScrollToTopButton from '@/components/Navigation/ScrollToTopButton';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'TechFin | Security Solutions',
-  description: 'Professional security solutions, CCTV, home automation, and access control in Mangalore and beyond.'
+  title: 'Site Safety Solutions',
+  description: 'Practical Health & Safety Support Built on Experience and Trust.'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Navbar />
         {children}
         <Footer />
-        <FloatingWhatsApp />
+        <ScrollToTopButton />
       </body>
     </html>
   );

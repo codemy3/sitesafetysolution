@@ -1,316 +1,488 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { 
-  Wrench, 
-  Settings, 
-  ShieldCheck, 
-  ChevronRight, 
-  Radio, 
-  Terminal,
-  Activity,
-  Cpu,
-  ArrowUpRight
-} from 'lucide-react';
-import { JetBrains_Mono } from 'next/font/google';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Check, ArrowUpRight } from "lucide-react";
 
-const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '700'] });
-
-// --- TABS & CATEGORIES ---
-const categories = ['Home Automation', 'Smart Systems', 'Surveillance Cameras'] as const;
-
-// --- COMPLETE DATA FROM PDF ---
-const catalogData = [
-  // Home Automation
-  { id: "HA-01", category: "Home Automation", title: "Smart Switches", desc: "Control lights, fans, and appliances with ease through touch, mobile apps, or voice commands, bringing convenience and energy efficiency to your home.", img: "/images/smart-switches.png" },
-  { id: "HA-02", category: "Home Automation", title: "Digital Door Locks", desc: "Provide keyless entry with PIN codes, cards, or fingerprints, ensuring advanced security and convenient access for your home or office.", img: "/images/digital-door-locks.png" },
-  { id: "HA-03", category: "Home Automation", title: "Motion Detecting Lights", desc: "Enhance security and convenience by automatically activating when movement is detected, ensuring safety while saving energy.", img: "/images/motion-detect-sensor.png" },
-  { id: "HA-04", category: "Home Automation", title: "Dimmer Lights", desc: "Adjust brightness to create the perfect ambiance while saving energy, giving you both comfort and control in your living space.", img: "/images/dimmer-light.png" },
-  { id: "HA-05", category: "Home Automation", title: "Curtains Motors", desc: "Open and close curtains effortlessly with remote, app, or voice control, adding convenience, comfort, and a touch of luxury to your home.", img: "/images/curtains-motors.png" },
-  { id: "HA-06", category: "Home Automation", title: "Remote Gate", desc: "Provide secure and hassle-free entry with the convenience of operating your gate through a remote, app, or automation system.", img: "/images/remote-gate.png" },
-  { id: "HA-07", category: "Home Automation", title: "Public Address", desc: "Deliver clear and effective communication across wide areas, making them ideal for offices, schools, events, and commercial spaces.", img: "/images/indoor.jpg" },
-
-  // Smart Systems
-  { id: "SS-01", category: "Smart Systems", title: "Video Door Phones", desc: "See and talk to visitors before granting access, enhancing both security and convenience at your doorstep.", img: "/images/video-door.jpg" },
-  { id: "SS-02", category: "Smart Systems", title: "Visitor Entry Systems", desc: "Provide secure and hassle-free access management, allowing you to monitor, verify, and record visitors for enhanced safety and control.", img: "/images/visitor-entry-system.jpg" },
-  { id: "SS-03", category: "Smart Systems", title: "Smart Cloud AI", desc: "Intelligent cloud-based technology to analyze data in real time, offering advanced security, remote monitoring, and smarter decision-making.", img: "/images/about3.jpg" },
-  { id: "SS-04", category: "Smart Systems", title: "Boom Barriers", desc: "Controlled vehicle access at entrances and exits, ensuring security, smooth traffic management, and authorized entry.", img: "/images/boom-barriers.png" },
-  { id: "SS-05", category: "Smart Systems", title: "Biometric System", desc: "Use fingerprints, facial recognition, or iris scans to provide secure, keyless access and accurate identity verification.", img: "/images/biometric-system.png" },
-
-  // Surveillance Cameras
-  { id: "SV-01", category: "Surveillance Cameras", title: "Outdoor Camera", desc: "Keep your surroundings secure with our weatherproof outdoor cameras, built for 24/7 protection.", img: "/images/outdoor.jpg" },
-  { id: "SV-02", category: "Surveillance Cameras", title: "Indoor Camera", desc: "Monitor your home or office interiors with high-definition clarity and real-time alerts.", img: "/images/indoor.jpg" },
-  { id: "SV-03", category: "Surveillance Cameras", title: "Solar Camera", desc: "Enjoy uninterrupted surveillance with eco-friendly solar cameras—no wires, no limits.", img: "/images/solar-camera.png" },
-  { id: "SV-04", category: "Surveillance Cameras", title: "Vehicle Dash Camera", desc: "Capture every journey and protect your drive with reliable vehicle dash cams.", img: "/images/dash-camera.png" },
-  { id: "SV-05", category: "Surveillance Cameras", title: "PIR Sensor Camera", desc: "Detect motion instantly and reduce false alarms with PIR sensor-based surveillance.", img: "/images/pirsensor.png" },
-  { id: "SV-06", category: "Surveillance Cameras", title: "PTZ Camera", desc: "Cover wide areas with intelligent zoom, pan, and tilt features—all in one powerful camera.", img: "/images/ptz.webp" },
-  { id: "SV-07", category: "Surveillance Cameras", title: "Wireless Camera", desc: "Simplify setup and security with flexible, high-performance wireless cameras.", img: "/images/wireless-camera.png" },
-  { id: "SV-08", category: "Surveillance Cameras", title: "C-Mount Camera", desc: "Customize your surveillance range with C-Mount cameras perfect for industrial or long-distance monitoring.", img: "/images/c-mount.png" },
-  { id: "SV-09", category: "Surveillance Cameras", title: "ANPR System", desc: "Automatically capture and recognize vehicle number plates, enabling efficient access control and traffic monitoring.", img: "/images/outdoor.jpg" },
-  { id: "SV-10", category: "Surveillance Cameras", title: "CCTV with PA", desc: "Integrated system combines CCTV surveillance with public address functionality for improved safety and crowd management.", img: "/images/indoor.jpg" }
+const services = [
+  {
+    id: "service-01",
+    num: "01",
+    shortNav: "FIRE RISK",
+    eyebrow: "FIRE RISK ASSESSMENTS",
+    subEyebrow: "STATUTORY UK COMPLIANCE",
+    titleWhite: "FIRE RISK",
+    titleAccent: "ASSESSMENTS",
+    description:
+      "Comprehensive assessment of your building's fire safety risks and compliance with the Regulatory Reform (Fire Safety) Order and Building Safety Act.",
+    bullets: [
+      "Commercial premises, offices, warehouses & HMOs",
+      "Clear hazard identification & risk evaluation",
+      "Prioritised action plan delivered in 5–7 days",
+    ],
+    tags: ["PAS 79 Aligned", "Statutory Duty"],
+    image: "/images/service1.png",
+    link: "/fire-risk-assessments",
+    cta: "Explore Fire Risk Page",
+  },
+  {
+    id: "service-02",
+    num: "02",
+    shortNav: "RAMS",
+    eyebrow: "RISK ASSESSMENTS & METHOD STATEMENTS",
+    subEyebrow: "PRACTICAL & SITE-SPECIFIC",
+    titleWhite: "RISK ASSESSMENTS",
+    titleAccent: "& RAMS",
+    description:
+      "Task-specific Risk Assessments and Method Statements built around your actual site operations to satisfy Principal Contractors and pass pre-start checks.",
+    bullets: [
+      "Bespoke RAMS documentation tailored to your specific operations",
+      "Tailored to construction & high-risk activities",
+      "Fast turnaround for urgent site mobilisation",
+    ],
+    tags: ["Bespoke RAMS", "Contractor Approved"],
+    image: "/images/service2.png",
+    link: "/contact",
+    cta: "Request RAMS Support",
+  },
+  {
+    id: "service-03",
+    num: "03",
+    shortNav: "POLICIES",
+    eyebrow: "HEALTH & SAFETY POLICIES",
+    subEyebrow: "FOUNDATIONAL DOCUMENTATION",
+    titleWhite: "H&S POLICIES &",
+    titleAccent: "PROCEDURES",
+    description:
+      "Professionally drafted Health & Safety policies, company manuals, and everyday workplace procedures required by law for businesses employing 5 or more people.",
+    bullets: [
+      "Statement of intent, roles & responsibilities",
+      "Practical arrangements tailored to your workflow",
+      "Annual policy reviews & legislative updates",
+    ],
+    tags: ["5+ Employees Legal Duty", "Bespoke Manuals"],
+    image: "/images/service3.png",
+    link: "/contact",
+    cta: "Enquire About Policies",
+  },
+  {
+    id: "service-04",
+    num: "04",
+    shortNav: "AUDITS",
+    eyebrow: "SITE INSPECTIONS & AUDITS",
+    subEyebrow: "PROACTIVE GAP ANALYSIS",
+    titleWhite: "SITE INSPECTIONS",
+    titleAccent: "& SAFETY AUDITS",
+    description:
+      "Independent on-site inspections and workplace audits that evaluate your current arrangements, spot compliance gaps early, and provide clear corrective actions.",
+    bullets: [
+      "Construction sites, factories, warehouses & offices",
+      "Detailed photographic inspection reports",
+      "Proportionate, cost-effective recommendations",
+    ],
+    tags: ["On-Site Visits", "Actionable Reports"],
+    image: "/images/service4.png",
+    link: "/contact",
+    cta: "Book a Site Inspection",
+  },
+  {
+    id: "service-05",
+    num: "05",
+    shortNav: "CDM 2015",
+    eyebrow: "CDM 2015 REGULATIONS",
+    subEyebrow: "CONSTRUCTION COMPLIANCE",
+    titleWhite: "CDM HEALTH &",
+    titleAccent: "SAFETY SUPPORT",
+    description:
+      "Specialized support for the Construction (Design and Management) Regulations 2015—helping clients, Principal Contractors, and designers discharge their legal duties.",
+    bullets: [
+      "Construction Phase Plans (CPP) & updates",
+      "Pre-construction information & risk checks",
+      "Ongoing site safety compliance monitoring",
+    ],
+    tags: ["CDM 2015", "Principal Contractors"],
+    image: "/images/service5.png",
+    link: "/contact",
+    cta: "Get CDM Support",
+  },
+  {
+    id: "service-06",
+    num: "06",
+    shortNav: "COSHH",
+    eyebrow: "HAZARDOUS SUBSTANCES",
+    subEyebrow: "WORKPLACE EXPOSURE CONTROL",
+    titleWhite: "COSHH",
+    titleAccent: "ASSESSMENTS",
+    description:
+      "Control of Substances Hazardous to Health assessments that identify chemical, dust, and fume hazards in your workplace and establish safe control measures.",
+    bullets: [
+      "Safety Data Sheet (SDS) review & task analysis",
+      "Practical PPE & ventilation control guidance",
+      "Clear operative-friendly COSHH assessment sheets",
+    ],
+    tags: ["UK COSHH Regs", "Hazard Control"],
+    image: "/images/service6.png",
+    link: "/contact",
+    cta: "Request COSHH Support",
+  },
+  {
+    id: "service-07",
+    num: "07",
+    shortNav: "INCIDENTS",
+    eyebrow: "INCIDENT RESPONSE",
+    subEyebrow: "ROOT CAUSE & RIDDOR",
+    titleWhite: "ACCIDENT",
+    titleAccent: "INVESTIGATIONS",
+    description:
+      "Independent, objective investigation of workplace accidents, near misses, and incidents to establish root causes and prevent future occurrences.",
+    bullets: [
+      "Thorough root-cause analysis & evidence gathering",
+      "RIDDOR reporting guidance & HSE liaison support",
+      "Practical corrective action plans",
+    ],
+    tags: ["RIDDOR Guidance", "Root Cause Analysis"],
+    image: "/images/service7.png",
+    link: "/contact",
+    cta: "Speak to a Consultant",
+  },
+  {
+    id: "service-08",
+    num: "08",
+    shortNav: "TRAINING",
+    eyebrow: "WORKFORCE COMPETENCE",
+    subEyebrow: "ENGAGING SITE BRIEFINGS",
+    titleWhite: "TRAINING &",
+    titleAccent: "TOOLBOX TALKS",
+    description:
+      "Practical health and safety training and targeted toolbox talks tailored to your actual site risks—helping operatives understand and follow safe systems of work.",
+    bullets: [
+      "Site inductions & task-specific toolbox talks",
+      "Plain-English delivery with zero jargon",
+      "Attendance records to evidence workforce training",
+    ],
+    tags: ["On-Site Briefings", "Operative Focused"],
+    image: "/images/service8.png",
+    link: "/contact",
+    cta: "Arrange Site Training",
+  },
+  {
+    id: "service-09",
+    num: "09",
+    shortNav: "RETAINED",
+    eyebrow: "RETAINED SUPPORT",
+    subEyebrow: "COMPETENT PERSON SERVICE",
+    titleWhite: "ONGOING H&S",
+    titleAccent: "CONSULTANCY",
+    description:
+      "Continuous professional support for your health and safety arrangements—giving you direct access to an OSHCR Registered Consultant whenever you need advice.",
+    bullets: [
+      "Scheduled quarterly or monthly compliance visits",
+      "Direct telephone & email support when needed",
+      "Cost-effective alternative to an in-house H&S manager",
+    ],
+    tags: ["Retained Support", "OSHCR Registered"],
+    image: "/images/service9.png",
+    link: "/contact",
+    cta: "Discuss Ongoing Support",
+  },
 ];
 
-// --- DESIGN COMPONENTS ---
-function GridPattern({ className = "" }: { className?: string }) {
-  return (
-    <div 
-      className={`pointer-events-none absolute inset-0 z-0 opacity-[0.4] ${className}`}
-      style={{
-        backgroundImage: `
-          linear-gradient(to right, #e2e8f0 1px, transparent 1px),
-          linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
-        `,
-        backgroundSize: '40px 40px'
-      }}
-    />
-  );
-}
+export default function ServicesPage() {
+  const [activeService, setActiveService] = useState<string>("service-01");
 
-function ViewfinderCorners({ className = 'border-[#B8AD76]' }: { className?: string }) {
-  return (
-    <>
-      <span className={`pointer-events-none absolute left-0 top-0 h-4 w-4 sm:h-6 sm:w-6 border-l-2 border-t-2 ${className}`} />
-      <span className={`pointer-events-none absolute right-0 top-0 h-4 w-4 sm:h-6 sm:w-6 border-r-2 border-t-2 ${className}`} />
-      <span className={`pointer-events-none absolute bottom-0 left-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-l-2 ${className}`} />
-      <span className={`pointer-events-none absolute bottom-0 right-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-r-2 ${className}`} />
-    </>
-  );
-}
+  // Scroll-spy to highlight the active service in the sticky top filter bar
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 260;
 
-export default function ModernProductsPage() {
+      for (const service of services) {
+        const el = document.getElementById(service.id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveService(service.id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToService = (id: string) => {
+    setActiveService(id);
+    const el = document.getElementById(id);
+    if (el) {
+      const y = el.getBoundingClientRect().top + window.scrollY - 185;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 selection:bg-[#B8AD76]/20 selection:text-slate-900">
+    <main className="min-h-screen bg-[#F4F6F8]">
       
-      {/* ========================================== */}
-      {/* 1. CINEMATIC HERO SECTION (Dark Edition)   */}
-      {/* ========================================== */}
-      <section className="relative overflow-hidden bg-[#0f3b43] pb-24 pt-32 sm:pb-36 sm:pt-40">
-        {/* Abstract Background Overlay */}
-        <div className="absolute inset-0 z-0 bg-[url('/images/hero-background.png')] bg-cover bg-center opacity-10 mix-blend-overlay pointer-events-none" />
-        
-        {/* Subtle grid and glows */}
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#B8AD76]/20 via-[#0f3b43]/0 to-[#0f3b43]/0 pointer-events-none" />
-        
-        {/* Technical HUD Elements */}
-        <div className={`${mono.className} absolute left-6 top-6 hidden items-center gap-4 text-[10px] uppercase tracking-widest text-white/50 sm:flex`}>
-          <span>TCF-CATALOG // 2026</span>
-          <span className="h-px w-8 bg-white/20" />
-          <span className="flex items-center gap-2 text-[#B8AD76]"><Activity size={12} className="animate-pulse" /> LIVE</span>
+      {/* 1. CENTERED HERO WITH BACKGROUND IMAGE & DECORATIVE FRAME */}
+      <section className="relative min-h-[380px] sm:min-h-[440px] flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-16 bg-secondary overflow-hidden">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url("/images/service-hero.png")',
+          }}
+        >
+          <div className="absolute inset-0 bg-[#0B111E]/85" />
         </div>
 
-        <ViewfinderCorners className="border-[#B8AD76]/40 hidden sm:block m-6" />
-        
-        <div className="relative z-10 mx-auto max-w-[1400px] px-4 text-center sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+        {/* Decorative Inner Frame */}
+        <div className="pointer-events-none absolute inset-x-3.5 sm:inset-x-12 top-24 sm:top-28 bottom-5 sm:bottom-8 border border-white/10 rounded-2xl sm:rounded-3xl z-[1]" />
+
+        <div className="relative z-10 mx-auto max-w-3xl px-5 sm:px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-4xl"
+            transition={{ duration: 0.55 }}
           >
-            <div className={`${mono.className} mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-slate-300 shadow-sm backdrop-blur-md`}>
-              <ShieldCheck size={16} className="text-[#B8AD76]" />
-              <span>Complete Ecosystem</span>
+            <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 mb-3 sm:mb-4">
+              <span className="w-6 sm:w-8 h-[1.5px] bg-primary" />
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-primary">
+                What We Do
+              </span>
+              <span className="w-6 sm:w-8 h-[1.5px] bg-primary" />
             </div>
-            
-            <h1 className="text-5xl font-black uppercase tracking-tighter text-white sm:text-7xl lg:text-[7.5rem] leading-none">
-              Products & <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B8AD76] to-white/70">Services</span>
+
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-3 sm:mb-4">
+              Our <span className="text-primary">Services</span>
             </h1>
-            
-            <p className="mx-auto mt-8 max-w-2xl text-base text-slate-400 sm:text-xl font-light">
-              Explore our comprehensive range of high-performance surveillance systems, smart access control, and intelligent home automation hardware.
+
+            <p className="text-xs sm:text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              Practical, proportionate health and safety documentation, site
+              audits, and consultancy tailored to UK businesses.
             </p>
           </motion.div>
         </div>
-
-        {/* Diagonal Shape Divider for Creative Separation */}
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
-          <svg className="relative block w-full h-[40px] sm:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M1200 120L0 16.48V120h1200z" className="fill-slate-50"></path>
-          </svg>
-        </div>
       </section>
 
-      {/* ========================================== */}
-      {/* 2. EDITORIAL STICKY CATALOG                */}
-      {/* ========================================== */}
-      <section className="relative py-16 sm:py-32">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          
-          {categories.map((category, idx) => {
-            const categoryProducts = catalogData.filter(item => item.category === category);
-            
+      {/* 2. STICKY TOP FILTER BAR — All 9 Services Visible on Mobile (5+4 Grid) & Desktop (9-Col Row) */}
+      <div className="sticky top-[74px] sm:top-[86px] z-40 bg-white/95 backdrop-blur-md border-y border-gray-200 shadow-sm">
+        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-5 sm:grid-cols-9 bg-gray-200/80 gap-px border-x border-gray-200/80">
+            {services.map((item, idx) => {
+              const isActive = activeService === item.id;
+              const isLastMobileItem = idx === 8;
+              return (
+                <button
+                  key={item.num}
+                  type="button"
+                  onClick={() => scrollToService(item.id)}
+                  className={`group relative py-2 sm:py-3.5 px-1 sm:px-2 flex flex-col items-center justify-center text-center transition-colors cursor-pointer ${
+                    isLastMobileItem ? "col-span-2 sm:col-span-1" : "col-span-1"
+                  } ${
+                    isActive
+                      ? "bg-[#EAFBF0]"
+                      : "bg-white hover:bg-gray-50"
+                  }`}
+                >
+                  {/* Active Bottom Indicator Bar */}
+                  <span
+                    className={`absolute bottom-0 inset-x-0 h-[2.5px] sm:h-[3px] bg-primary transition-transform duration-300 ${
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-50"
+                    }`}
+                  />
+
+                  <span
+                    className={`text-[10px] sm:text-xs font-extrabold leading-none transition-colors ${
+                      isActive
+                        ? "text-primary"
+                        : "text-primary/70 group-hover:text-primary"
+                    }`}
+                  >
+                    {item.num}
+                  </span>
+                  <span
+                    className={`text-[8.5px] sm:text-[10px] lg:text-[11px] font-extrabold uppercase tracking-tight sm:tracking-wider mt-1 truncate max-w-full transition-colors ${
+                      isActive
+                        ? "text-secondary"
+                        : "text-secondary/75 group-hover:text-secondary"
+                    }`}
+                  >
+                    {item.shortNav}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* 3. ALTERNATING SPLIT SHOWCASE CARDS (Alternates on BOTH Mobile & Desktop) */}
+      <section className="py-10 sm:py-14 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-12 lg:space-y-16">
+          {services.map((service, index) => {
+            const isEven = index % 2 === 1;
+
             return (
-              <div key={category} id={category.toLowerCase().replace(/\s+/g, '-')} className="mb-24 flex flex-col gap-12 lg:mb-40 lg:flex-row lg:gap-16 border-t border-slate-200 pt-16 lg:pt-24 first:border-0 first:pt-0 scroll-mt-32">
-                
-                {/* LEFT: Sticky Category Title */}
-                <div className="lg:w-1/3">
-                  <div className="sticky top-32">
-                    <div className={`${mono.className} mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#B8AD76]`}>
-                      <Terminal size={14} /> CATEGORY // 0{idx + 1}
+              <motion.div
+                id={service.id}
+                key={service.num}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55 }}
+                className="group rounded-2xl sm:rounded-[2rem] overflow-hidden border border-gray-300/90 shadow-[0_20px_50px_rgba(15,23,42,0.1)] bg-[#0E131B] grid grid-cols-1 lg:grid-cols-12 lg:min-h-[480px] scroll-mt-44"
+              >
+                {/* DARK CONTENT HALF:
+                    Odd Cards (01, 03, 05...): 1st on Mobile & Left on Desktop (order-1)
+                    Even Cards (02, 04, 06...): 2nd on Mobile & Right on Desktop (order-2) */}
+                <div
+                  className={`lg:col-span-6 bg-[#0E131B] text-white p-6 sm:p-10 lg:p-14 flex flex-col justify-between ${
+                    isEven ? "order-2" : "order-1"
+                  }`}
+                >
+                  <div>
+                    {/* Two-Line Uppercase Eyebrow */}
+                    <div className="mb-3.5 sm:mb-5">
+                      <span className="block text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.25em] text-primary">
+                        {service.eyebrow}
+                      </span>
+                      <span className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500 mt-0.5 sm:mt-1">
+                        {service.subEyebrow}
+                      </span>
                     </div>
-                    <h2 className="text-4xl font-black uppercase tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-                      {category}
+
+                    {/* Heavy Stacked Two-Tone Heading */}
+                    <h2 className="text-2xl sm:text-4xl lg:text-[2.65rem] font-black uppercase tracking-tight leading-[1.04] mb-4 sm:mb-5">
+                      <span className="block text-white">
+                        {service.titleWhite}
+                      </span>
+                      <span className="block text-primary">
+                        {service.titleAccent}
+                      </span>
                     </h2>
-                    <p className="mt-6 max-w-sm text-sm font-light text-slate-500 sm:text-base leading-relaxed">
-                      Industrial-grade hardware designed to seamlessly integrate into your daily environment, ensuring maximum control and security.
+
+                    {/* Description */}
+                    <p className="text-xs sm:text-[15px] text-gray-400 leading-relaxed mb-5 sm:mb-7 max-w-lg">
+                      {service.description}
                     </p>
+
+                    {/* 3 Checkmark Bullet Points */}
+                    <ul className="space-y-2.5 sm:space-y-3.5 mb-6 sm:mb-8">
+                      {service.bullets.map((bullet, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-3 text-xs sm:text-sm text-gray-200 font-medium"
+                        >
+                          <span className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-primary/20 border border-primary/40 text-primary flex items-center justify-center shrink-0">
+                            <Check size={12} strokeWidth={3} />
+                          </span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Action Link */}
+                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                    <Link
+                      href={service.link}
+                      className="inline-flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-extrabold uppercase tracking-wider text-white hover:text-primary transition-colors"
+                    >
+                      <span>{service.cta}</span>
+                      <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary text-gray-950 flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                        <ArrowUpRight size={15} strokeWidth={2.5} />
+                      </span>
+                    </Link>
+
+                    <span className="text-xs font-mono font-bold text-white/30">
+                      {service.num} / 09
+                    </span>
                   </div>
                 </div>
 
-                {/* RIGHT: Product Grid */}
-                <div className="grid gap-6 sm:grid-cols-2 lg:w-2/3 xl:gap-8">
-                  
+                {/* FULL-BLEED IMAGE HALF:
+                    Odd Cards (01, 03, 05...): 2nd on Mobile & Right on Desktop (order-2)
+                    Even Cards (02, 04, 06...): 1st on Mobile & Left on Desktop (order-1) */}
+                <div
+                  className={`lg:col-span-6 relative min-h-[230px] sm:min-h-[320px] lg:min-h-full overflow-hidden ${
+                    isEven ? "order-1" : "order-2"
+                  }`}
+                >
+                  {/* Full-Box Cover Image */}
+                  <img
+                    src={service.image}
+                    alt={`${service.titleWhite} ${service.titleAccent}`}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
 
-                  {categoryProducts.map((product, pIdx) => (
-                    <motion.div
-                      key={product.id}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-50px" }}
-                      transition={{ duration: 0.5, delay: pIdx * 0.05 }}
-                      className="group relative flex flex-col overflow-hidden rounded-[2rem] border border-slate-200/80 bg-white transition-all duration-500 hover:-translate-y-2 hover:border-[#B8AD76]/50 hover:shadow-xl hover:shadow-[#B8AD76]/5"
-                    >
-                      {/* Image Container */}
-                      <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-slate-100 bg-slate-50">
-                        
-                        {/* Technical ID Badge */}
-                        <div className={`${mono.className} absolute top-4 left-4 z-10 flex items-center gap-2 rounded-lg bg-white/90 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest text-slate-700 border border-slate-200/60 shadow-sm`}>
-                          <Radio size={12} className="text-[#B8AD76] group-hover:animate-pulse" />
-                          <span>ID // {product.id}</span>
-                        </div>
+                  {/* Subtle Dark Gradient Overlay for Contrast */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0E131B]/80 via-[#0E131B]/15 to-transparent" />
 
-                        {/* REMOVED grayscale class so images show full color immediately */}
-                        <Image
-                          src={product.img}
-                          alt={product.title}
-                          fill
-                          className="object-cover transition-all duration-700 group-hover:scale-105"
-                        />
-                        
-                        {/* Subtle inner shadow overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-transparent pointer-events-none" />
-                      </div>
+                  {/* Giant Translucent Number Overlay in Bottom Corner */}
+                  <span
+                    aria-hidden="true"
+                    className={`pointer-events-none select-none absolute -bottom-4 sm:-bottom-6 ${
+                      isEven ? "left-4 sm:left-6" : "right-4 sm:right-6"
+                    } text-[6.5rem] sm:text-[11rem] font-black leading-none text-white/20 tracking-tighter z-10`}
+                  >
+                    {service.num}
+                  </span>
 
-                      {/* Text Content */}
-                      <div className="flex flex-1 flex-col justify-between p-6 sm:p-8">
-                        <div>
-                          <h3 className="text-2xl font-bold tracking-tight text-slate-900 group-hover:text-[#B8AD76] transition-colors">
-                            {product.title}
-                          </h3>
-                          <p className="mt-4 text-sm leading-relaxed text-slate-500 font-light">
-                            {product.desc}
-                          </p>
-                        </div>
-
-                        <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
-                          <span className={`${mono.className} text-[10px] font-bold text-slate-400 uppercase tracking-widest`}>
-                            STATUS: <span className="text-emerald-500">AVAILABLE</span>
-                          </span>
-                          <Link href="/contact" className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-50 border border-slate-200 text-slate-500 transition-all group-hover:bg-[#B8AD76] group-hover:text-white group-hover:border-[#B8AD76]">
-                            <ChevronRight size={18} />
-                          </Link>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
+                  {/* Floating Capability Pills at Top Corner of Full Image */}
+                  <div
+                    className={`absolute top-4 sm:top-6 ${
+                      isEven ? "left-4 sm:left-6" : "right-4 sm:right-6"
+                    } flex flex-wrap items-center gap-1.5 sm:gap-2 z-10`}
+                  >
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider bg-secondary/85 backdrop-blur-md text-white border border-white/15 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full shadow-lg"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                
-              </div>
+              </motion.div>
             );
           })}
         </div>
       </section>
 
-      {/* ========================================== */}
-      {/* 3. COLOR-BLOCKED SERVICE PROTOCOL          */}
-      {/* ========================================== */}
-      <section className="relative overflow-hidden bg-[#0f3b43] py-20 sm:py-32 border-t border-slate-200">
-        <GridPattern className="opacity-[0.1]" />
-        
-        <div className="relative z-10 mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-16 grid gap-8 lg:grid-cols-[1fr_1.5fr] lg:items-end">
-            <div>
-              <div className={`${mono.className} inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#B8AD76] mb-4`}>
-                <Terminal size={14} />
-                <span>Service Protocol</span>
-              </div>
-              <h2 className="text-4xl font-black uppercase tracking-tight text-white sm:text-5xl lg:text-6xl">
-                Professional Delivery <br />
-                <span className="text-white/40">& Dependable Support.</span>
+      {/* 4. MINIMAL GREEN CTA BANNER */}
+      <section className="pb-14 sm:pb-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative rounded-2xl sm:rounded-3xl bg-primary p-6 sm:px-12 sm:py-14 lg:px-14 lg:py-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 sm:gap-8 overflow-hidden shadow-[0_20px_50px_rgba(34,197,94,0.18)]"
+          >
+            <div className="pointer-events-none absolute -right-16 -bottom-16 sm:-right-20 sm:-bottom-20 w-48 h-48 sm:w-80 sm:h-80 rounded-full border-[20px] sm:border-[32px] border-white/15" />
+
+            <div className="relative z-10 max-w-xl">
+              <h2 className="text-xl sm:text-3xl lg:text-4xl font-extrabold text-secondary tracking-tight leading-[1.15]">
+                Practical Safety Solutions for Safer Businesses.
               </h2>
+              <p className="text-secondary/85 text-xs sm:text-base lg:text-lg font-medium mt-2 leading-relaxed">
+                Have a question or need a quote? Contact us today for a
+                no-obligation discussion.
+              </p>
             </div>
-            <p className="text-lg text-slate-300 font-light lg:justify-self-end lg:max-w-md lg:pb-2">
-              We combine quality products with expert installation and a responsive after-sales team to make every deployment smooth and reliable.
-            </p>
-          </div>
 
-          <div className="grid gap-6 sm:grid-cols-2">
-            
-            {/* Installation Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="group relative overflow-hidden rounded-[2.5rem] border border-[#09252a] bg-[#09252a]/80 p-8 sm:p-12 shadow-2xl backdrop-blur-md transition-transform hover:-translate-y-2"
+            <Link
+              href="/contact"
+              className="group relative z-10 inline-flex items-center justify-between sm:justify-start gap-3 sm:gap-4 bg-secondary hover:bg-gray-950 text-white font-bold text-xs sm:text-base pl-5 pr-1.5 py-1.5 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full transition-all duration-300 shadow-lg shrink-0"
             >
-              <div className={`${mono.className} absolute top-0 right-0 bg-[#B8AD76] px-4 py-2 rounded-bl-xl text-[10px] font-bold text-black uppercase tracking-widest`}>
-                PHASE // 01
-              </div>
-              
-              <div className="mb-8 inline-flex rounded-2xl bg-black/40 p-4 border border-white/10 text-white shadow-inner">
-                <Wrench size={32} className="group-hover:text-[#B8AD76] transition-colors" />
-              </div>
-              
-              <h3 className="text-3xl font-bold tracking-tight text-white">
-                Installation & Deployment
-              </h3>
-              <p className="mt-4 text-base leading-relaxed text-slate-300 font-light">
-                Our expert team ensures smooth, efficient, and secure installation at any location. We handle exact positioning, wiring, and network configuration for an optimal setup.
-              </p>
-              
-              <div className={`${mono.className} mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest`}>
-                <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#B8AD76]" /> POSITIONING</span>
-                <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#B8AD76]" /> WIRING</span>
-                <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#B8AD76]" /> CONFIG</span>
-              </div>
-            </motion.div>
-
-            {/* Maintenance Card */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="group relative overflow-hidden rounded-[2.5rem] border border-[#09252a] bg-[#09252a]/80 p-8 sm:p-12 shadow-2xl backdrop-blur-md transition-transform hover:-translate-y-2"
-            >
-              <div className={`${mono.className} absolute top-0 right-0 bg-[#B8AD76] px-4 py-2 rounded-bl-xl text-[10px] font-bold text-black uppercase tracking-widest`}>
-                PHASE // 02
-              </div>
-              
-              <div className="mb-8 inline-flex rounded-2xl bg-black/40 p-4 border border-white/10 text-white shadow-inner">
-                <Settings size={32} className="group-hover:text-[#B8AD76] transition-colors" />
-              </div>
-              
-              <h3 className="text-3xl font-bold tracking-tight text-white">
-                After-Sales & Maintenance
-              </h3>
-              <p className="mt-4 text-base leading-relaxed text-slate-300 font-light">
-                Count on us for ongoing support, timely maintenance, and quick troubleshooting to keep your security and automation systems running flawlessly around the clock.
-              </p>
-
-              <div className={`${mono.className} mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest`}>
-                <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#B8AD76]" /> 24/7 SUPPORT</span>
-                <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#B8AD76]" /> DIAGNOSTICS</span>
-                <span className="flex items-center gap-1"><span className="h-1.5 w-1.5 rounded-full bg-[#B8AD76]" /> UPGRADES</span>
-              </div>
-            </motion.div>
-
-          </div>
+              <span>Get in Touch</span>
+              <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-secondary flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                <ArrowUpRight size={16} strokeWidth={2.5} />
+              </span>
+            </Link>
+          </motion.div>
         </div>
       </section>
 

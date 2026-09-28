@@ -1,216 +1,136 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ArrowLeft, Cctv, Home, Fingerprint, Lock, Video, BellRing } from "lucide-react";
-
-const slides = [
-  {
-    id: "01",
-    title: "Surveillance",
-    subtitle: "AI-Powered Threat Detection",
-    description: "Enterprise-grade monitoring systems with real-time analytics and predictive threat assessment designed to provide 24/7 surveillance and peace of mind.",
-    image: "/images/hero1.png",
-    href: "/services#surveillance",
-  },
-  {
-    id: "02",
-    title: "Automation",
-    subtitle: "Intelligent Environment Control",
-    description: "Seamlessly control climate, lighting, and curtains from a single, intuitive centralized interface.",
-    image: "/images/hero_automation.png",
-    href: "/services#automation",
-  },
-  {
-    id: "03",
-    title: "Access",
-    subtitle: "Enterprise Biometric Systems",
-    description: "Advanced fingerprint, facial recognition, and digital locks for absolute perimeter control.",
-    image: "/images/visitor-entry-system.jpg",
-    imageMobile: "/images/hero3_access_mobile.png",
-    href: "/services#access",
-  },
-  {
-    id: "04",
-    title: "Perimeter",
-    subtitle: "High-Speed Traffic Management",
-    description: "Robust boom barriers and public address systems engineered for heavy, continuous daily use.",
-    image: "/images/boom-barriers.png",
-    href: "/services#gates",
-  }
-];
-
-const GateAutomationIcon = ({ size = 56, strokeWidth = 1.5 }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={strokeWidth}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M8.5 4a5 5 0 0 1 7 0" />
-    <path d="M10 6.5a2.5 2.5 0 0 1 4 0" />
-    <path d="M12 9v.01" />
-    <path d="M4 22V10" />
-    <path d="M4 12c2-2 4-2 7 0v10H4" />
-    <path d="M7 12.5V22" />
-    <path d="M20 22V10" />
-    <path d="M20 12c-2-2-4-2-7 0v10h7" />
-    <path d="M17 12.5V22" />
-    <path d="M4 16h7" />
-    <path d="M20 16h-7" />
-  </svg>
-);
-
-const bottomFeatures = [
-  { label: "SURVEILLANCE", icon: <Cctv size={56} strokeWidth={1.5} /> },
-  { label: "HOME AUTOMATION", icon: <Home size={56} strokeWidth={1.5} /> },
-  { label: "ACCESS CONTROL", icon: <Fingerprint size={56} strokeWidth={1.5} /> },
-  { label: "GATE AUTOMATION", icon: <GateAutomationIcon size={56} strokeWidth={1.5} /> },
-  { label: "VIDEO DOOR PHONES", icon: <Video size={56} strokeWidth={1.5} /> },
-  { label: "INTRUSION ALARMS", icon: <BellRing size={56} strokeWidth={1.5} /> }
-];
-
-const SLIDE_DURATION = 2000;
+import { motion } from "framer-motion";
+import { ArrowUpRight, Layers, FileCheck2 } from "lucide-react";
 
 export default function HeroSection() {
-  const [active, setActive] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setActive((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, SLIDE_DURATION);
-    return () => clearInterval(timer);
-  }, [active]);
-
-  const nextSlide = () => setActive((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  const prevSlide = () => setActive((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-
   return (
-    <section className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0a0a] flex flex-col justify-center">
+    <section className="relative min-h-[88vh] sm:min-h-[90vh] w-full flex items-end sm:items-center pt-28 pb-10 sm:pt-32 sm:pb-16 overflow-hidden bg-secondary">
+      {/* 1. Background Image — Focal point shifted on mobile so the worker stays visible */}
+      <div
+        className="absolute inset-0 z-0 bg-cover bg-[72%_center] sm:bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url("/images/hero.png")',
+        }}
+      >
+        {/* Mobile Overlay: Top-to-Bottom Editorial Gradient so top image is clear & bottom text is crisp */}
+        <div className="absolute inset-0 sm:hidden bg-gradient-to-t from-[#0B111E] via-[#0B111E]/88 via-65% to-[#0B111E]/25" />
 
-      {/* --- 1. FULL-BLEED BACKGROUND WITH INSTANT CROSSFADE --- */}
-      <div className="absolute inset-0 h-full w-full">
-        {/* Removed mode="wait" so images transition instantly without delay */}
-        <AnimatePresence>
-          <motion.div
-            key={active}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }} 
-            className="absolute inset-0 h-full w-full"
-          >
-            {(slides as any)[active].imageMobile ? (
-              <>
-                <Image
-                  src={(slides as any)[active].imageMobile}
-                  alt={slides[active].title}
-                  fill
-                  priority
-                  className="object-cover object-center md:hidden"
-                />
-                <Image
-                  src={slides[active].image}
-                  alt={slides[active].title}
-                  fill
-                  priority
-                  className="hidden object-cover object-center md:block"
-                />
-              </>
-            ) : (
-              <Image
-                src={slides[active].image}
-                alt={slides[active].title}
-                fill
-                priority // Ensures the browser loads it immediately
-                className="object-cover object-center"
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Dark overlay for perfect contrast */}
-        <div className="absolute inset-0 bg-black/50 z-0" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-black/40 to-black/80 pointer-events-none z-0" />
+        {/* Desktop Overlay: Original Left-to-Right Gradient */}
+        <div className="hidden sm:block absolute inset-0 bg-gradient-to-r from-[#0B111E]/95 via-[#0B111E]/80 via-50% to-transparent" />
       </div>
 
-      {/* --- 2. CENTERED MAIN CONTENT --- */}
-      <div className="relative z-20 flex w-full flex-col items-center px-4 sm:px-6 text-center -mt-16 md:-mt-20">
-        {/* We keep mode="wait" on the text so it doesn't overlap messily during rapid clicks */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }} // Sped up the text entrance
-            className="flex max-w-5xl flex-col items-center"
-          >
-            {/* Title with Tech Corner Brackets */}
-            <div className="relative mb-4 sm:mb-6 inline-block px-6 py-3 sm:px-12 sm:py-6">
-              <div className="absolute left-0 top-0 h-3 w-3 sm:h-4 sm:w-4 border-l-2 border-t-2 border-white/40 md:h-6 md:w-6" />
-              <div className="absolute bottom-0 right-0 h-3 w-3 sm:h-4 sm:w-4 border-b-2 border-r-2 border-white/40 md:h-6 md:w-6" />
+      {/* 2. Main Content Container */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-[680px]"
+        >
 
-              <h1 className="text-3xl font-black uppercase tracking-[0.1em] text-white sm:text-5xl md:tracking-[0.15em] md:text-7xl lg:text-[7.5rem] leading-none drop-shadow-2xl">
-                {slides[active].title}
-              </h1>
-            </div>
 
-            <p className="mb-6 sm:mb-8 max-w-2xl px-4 text-xs font-medium leading-relaxed text-white/90 sm:text-sm md:text-base lg:text-lg">
-              {slides[active].description}
+          {/* Strict 2-Line Headline */}
+          <h1 className="text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[3.25rem] font-extrabold text-white uppercase tracking-tight sm:leading-[1.1] mb-4 sm:mb-5">
+            <span className="block whitespace-nowrap">
+              Practical &amp; Compliant
+            </span>
+            <span className="block whitespace-nowrap">
+              Site Safety <span className="text-primary">Solutions.</span>
+            </span>
+          </h1>
+
+          {/* Lead Paragraph */}
+          <div className="relative pl-3.5 sm:pl-4 border-l-2 border-primary mb-6 sm:mb-8 max-w-lg">
+            <p className="text-xs sm:text-[15px] text-gray-200/95 leading-relaxed">
+              OSHCR Registered Consultant providing practical, reliable and
+              cost-effective health and safety consultancy, RAMS documentation,
+              and site support across all UK sectors.
             </p>
+          </div>
+
+          {/* Action Row — Side-by-side on mobile (grid-cols-2), original flex on desktop */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-4 mb-6 sm:mb-9">
+            <Link
+              href="/contact"
+              className="group relative inline-flex items-center justify-between sm:justify-start gap-2 sm:gap-4 bg-white text-gray-950 font-bold text-xs sm:text-sm pl-4 pr-1.5 py-1.5 sm:pl-6 sm:pr-2 sm:py-2 rounded-full overflow-hidden transition-colors duration-300 shadow-xl"
+            >
+              <span className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+              <span className="relative z-10 group-hover:text-gray-950 transition-colors truncate">
+                Book Consultation
+              </span>
+              <span className="relative z-10 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gray-950 text-white flex items-center justify-center shrink-0 overflow-hidden">
+                <ArrowUpRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover:translate-x-5 group-hover:-translate-y-5"
+                />
+                <ArrowUpRight
+                  size={14}
+                  className="absolute -translate-x-5 translate-y-5 text-primary transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0"
+                />
+              </span>
+            </Link>
 
             <Link
-              href={slides[active].href}
-              className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-primary bg-primary px-6 py-2.5 sm:px-8 sm:py-3 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-white shadow-[0_12px_30px_rgba(0,62,71,0.25)] transition-all hover:bg-primary/90 hover:border-primary/90 md:px-10 md:py-4 md:text-xs"
+              href="/services"
+              className="group relative inline-flex items-center justify-center sm:justify-start gap-2 sm:gap-2.5 px-3.5 py-2.5 sm:px-6 sm:py-3.5 rounded-full border border-white/25 bg-white/[0.04] sm:bg-transparent text-white text-xs sm:text-sm font-semibold overflow-hidden backdrop-blur-sm"
             >
-              <span className="relative z-10">Get a Free Quote</span>
+              <span className="absolute inset-0 bg-white/15 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
+              <Layers
+                size={15}
+                className="relative z-10 text-primary shrink-0 transition-transform duration-300 group-hover:rotate-12"
+              />
+              <span className="relative z-10 truncate">Explore 9 Services</span>
             </Link>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          </div>
 
-      {/* --- 3. CIRCULAR SIDE NAVIGATION ARROWS --- */}
-      <div className="absolute left-2 top-1/2 z-20 -translate-y-1/2 sm:left-4 md:left-6 lg:left-12">
-        <button onClick={prevSlide} className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
-          <ArrowLeft size={16} strokeWidth={1.5} className="sm:h-[18px] sm:w-[18px]" />
-        </button>
-      </div>
-      <div className="absolute right-2 top-1/2 z-20 -translate-y-1/2 sm:right-4 md:right-6 lg:right-12">
-        <button onClick={nextSlide} className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/30 bg-black/20 text-white backdrop-blur-sm transition-all hover:scale-110 hover:border-white hover:bg-white hover:text-black md:h-12 md:w-12">
-          <ArrowRight size={16} strokeWidth={1.5} className="sm:h-[18px] sm:w-[18px]" />
-        </button>
-      </div>
+          {/* High-Contrast Split Offer Board — Stays Horizontal on Mobile & Desktop */}
+          <Link
+            href="/contact"
+            className="group relative inline-block w-full max-w-[490px] p-1 sm:p-1.5 rounded-2xl bg-white/15 backdrop-blur-md border border-white/25 shadow-2xl overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/60"
+          >
+            {/* 5-Second Periodic Light Sweep */}
+            <motion.div
+              animate={{ x: ["-150%", "250%"] }}
+              transition={{
+                duration: 1.1,
+                repeat: Infinity,
+                repeatDelay: 3.9,
+                ease: "easeInOut",
+              }}
+              className="pointer-events-none absolute inset-y-0 w-1/2 -skew-x-12 bg-gradient-to-r from-transparent via-white/35 to-transparent z-30"
+            />
 
-      {/* --- 4. BOTTOM STATIC FEATURE DOCK --- */}
-      <div className="absolute bottom-0 left-0 z-30 w-full px-2 pb-4 pt-16 sm:pb-6 sm:pt-20 md:px-6 md:pb-10">
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent md:via-black/60" />
-
-        <div className="relative z-10 mx-auto w-full max-w-7xl">
-          <div className="grid grid-cols-3 gap-y-4 gap-x-2 md:flex md:justify-between md:gap-4">
-            {bottomFeatures.map((item, idx) => (
-              <div key={idx} className="group flex flex-col items-center justify-center gap-2 sm:gap-3 transition-transform hover:-translate-y-1 cursor-pointer md:flex-1">
-                <div className="text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.4)] transition-all group-hover:scale-110 group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.8)]">
-                  <div className="scale-75 sm:scale-90 md:scale-100">
-                    {item.icon}
-                  </div>
+            <div className="relative z-10 rounded-xl bg-[#0F172A] border border-white/10 flex flex-row items-stretch overflow-hidden">
+              {/* Left Dark Details Area */}
+              <div className="flex-1 p-3 sm:px-5 sm:py-4 flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+                <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center shrink-0 text-primary">
+                  <FileCheck2 className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
-                <span className="text-center text-[7px] sm:text-[9px] font-black uppercase tracking-[0.1em] sm:tracking-[0.15em] text-white/90 md:text-[10px] lg:text-[11px] lg:tracking-[0.2em]">
-                  {item.label}
+                <div className="min-w-0">
+                  <span className="block text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-[0.16em] text-primary truncate">
+                    Fixed-Fee Turnaround
+                  </span>
+                  <h2 className="text-xs sm:text-base font-bold text-white leading-tight mt-0.5 truncate">
+                    H&amp;S Documentation
+                  </h2>
+                  <p className="text-[10px] sm:text-[11px] text-gray-400 mt-0.5 truncate">
+                    RAMS, Policies &amp; Fire Risk
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Solid Green Price Block — Docked on the Right in Both Mobile & Desktop */}
+              <div className="bg-primary group-hover:bg-accent transition-colors px-4 py-2.5 sm:px-5 sm:py-3.5 flex flex-col items-center justify-center text-gray-950 shrink-0">
+                <span className="text-xs sm:text-sm font-black tracking-tight uppercase leading-none text-center">
+                  Request<br/>Quote
                 </span>
               </div>
-            ))}
-          </div>
-        </div>
+            </div>
+          </Link>
+        </motion.div>
       </div>
-
     </section>
   );
 }

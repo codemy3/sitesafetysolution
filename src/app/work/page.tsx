@@ -1,225 +1,488 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { 
-  ShieldCheck, 
-  Activity,
+import React from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  Check,
+  Search,
+  Lightbulb,
+  Users,
   ArrowUpRight,
-  Radio
-} from 'lucide-react';
-import { JetBrains_Mono } from 'next/font/google';
+  Building2,
+  MapPin,
+  Layers,
+  ShieldCheck,
+} from "lucide-react";
 
-const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '700'] });
-
-// --- DATA ---
-const projects = [
+const projectMetrics = [
   {
-    id: "PRJ-01",
-    title: "Harborpoint Factory",
-    category: "Industrial Facility",
-    description: "Comprehensive CCTV surveillance and automated access control deployment across a 50,000 sq ft manufacturing floor.",
-    image: "/images/harborpoint_factory.png",
-    stats: [
-      { label: "Cameras", value: "120+" },
-      { label: "Uptime", value: "99.9%" }
-    ],
-    colSpan: "col-span-12 lg:col-span-8",
-    height: "h-[400px] sm:h-[600px]",
-    theme: "dark"
+    label: "Client",
+    value: "Byoot Construction Ltd",
+    icon: Building2,
   },
   {
-    id: "PRJ-02",
-    title: "Coastal View",
-    category: "Residential Complex",
-    description: "Complete smart systems integration including video door phones and automated visitor entry for 40 units.",
-    image: "/images/coastal_view.png",
-    stats: [
-      { label: "Units", value: "40" }
-    ],
-    colSpan: "col-span-12 lg:col-span-4",
-    height: "h-[400px] sm:h-[600px]",
-    theme: "light"
+    label: "Location",
+    value: "London, UK",
+    icon: MapPin,
   },
   {
-    id: "PRJ-03",
-    title: "Sagar Auditorium",
-    category: "Public Infrastructure",
-    description: "High-density surveillance, public address systems, and remote gate automation designed to manage large event crowds safely.",
-    image: "/images/sagar.jpeg",
-    stats: [
-      { label: "Capacity", value: "2000+" },
-      { label: "Coverage", value: "100%" }
-    ],
-    colSpan: "col-span-12 lg:col-span-4",
-    height: "h-[400px] sm:h-[600px]",
-    theme: "light"
+    label: "Scope",
+    value: "Multi-Project Support",
+    icon: Layers,
   },
   {
-    id: "PRJ-04",
-    title: "City Surveillance Network",
-    category: "Urban Security",
-    description: "Deployment of weather-proof outdoor and ANPR cameras at critical city intersections to monitor and control traffic flow.",
-    image: "/images/city_surveillance.png",
-    stats: [
-      { label: "Nodes", value: "45" },
-      { label: "Network", value: "Fiber" }
-    ],
-    colSpan: "col-span-12 lg:col-span-8",
-    height: "h-[400px] sm:h-[600px]",
-    theme: "dark"
-  }
+    label: "Focus",
+    value: "CDM 2015 & Site Safety",
+    icon: ShieldCheck,
+  },
 ];
 
-// --- COMPONENTS ---
-function ViewfinderCorners({ className = 'border-[#B8AD76]' }: { className?: string }) {
-  return (
-    <>
-      <span className={`pointer-events-none absolute left-0 top-0 h-4 w-4 sm:h-6 sm:w-6 border-l-2 border-t-2 ${className}`} />
-      <span className={`pointer-events-none absolute right-0 top-0 h-4 w-4 sm:h-6 sm:w-6 border-r-2 border-t-2 ${className}`} />
-      <span className={`pointer-events-none absolute bottom-0 left-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-l-2 ${className}`} />
-      <span className={`pointer-events-none absolute bottom-0 right-0 h-4 w-4 sm:h-6 sm:w-6 border-b-2 border-r-2 ${className}`} />
-    </>
-  );
-}
+const deliverables = [
+  "Regular site inspections",
+  "RAMS reviews & updates",
+  "Construction Phase Plans",
+  "Design-risk checks",
+  "Safety documentation reviews",
+  "Project team advisory",
+];
+
+const outcomes = [
+  "Closed identified compliance gaps",
+  "Strengthened CDM arrangements",
+  "Improved site safety standards",
+  "Avoided unnecessary costs",
+];
+
+const approaches = [
+  {
+    step: "01",
+    icon: Search,
+    title: "Thorough Audit",
+    desc: "Comprehensive baseline assessment to identify gaps in existing site and documentation arrangements.",
+  },
+  {
+    step: "02",
+    icon: Lightbulb,
+    title: "Practical Solutions",
+    desc: "Clear, actionable recommendations prioritised by actual on-site risk and legal compliance.",
+  },
+  {
+    step: "03",
+    icon: Users,
+    title: "Ongoing Support",
+    desc: "Continued hands-on guidance for project management teams through implementation and beyond.",
+  },
+];
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 selection:bg-[#B8AD76]/20 selection:text-slate-900">
+    <main className="min-h-screen bg-white">
       
-      {/* ========================================== */}
-      {/* 1. CINEMATIC HERO SECTION (Dark Edition)   */}
-      {/* ========================================== */}
-      <section className="relative overflow-hidden bg-[#0f3b43] pb-24 pt-32 sm:pb-36 sm:pt-40">
-        <div className="absolute inset-0 z-0 bg-[url('/images/hero-background.png')] bg-cover bg-center opacity-10 mix-blend-overlay pointer-events-none" />
-        
-        <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-        <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#B8AD76]/20 via-[#0f3b43]/0 to-[#0f3b43]/0 pointer-events-none" />
-        
-        <div className={`${mono.className} absolute left-6 top-6 hidden items-center gap-4 text-[10px] uppercase tracking-widest text-white/50 sm:flex`}>
-          <span>TCF-PORTFOLIO // 2026</span>
-          <span className="h-px w-8 bg-white/20" />
-          <span className="flex items-center gap-2 text-[#B8AD76]"><Activity size={12} className="animate-pulse" /> LIVE</span>
+      {/* 1. DARK HERO */}
+      <section className="relative min-h-[360px] sm:min-h-[420px] flex items-center justify-center pt-28 pb-14 sm:pt-32 sm:pb-20 bg-[#0B111E] overflow-hidden">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage:
+              'url("https://images.unsplash.com/photo-1541888086925-920eb1870462?q=80&w=2000&auto=format&fit=crop")',
+          }}
+        >
+          <div className="absolute inset-0 bg-[#0B111E]/85" />
         </div>
 
-        <ViewfinderCorners className="border-[#B8AD76]/40 hidden sm:block m-6" />
-        
-        <div className="relative z-10 mx-auto max-w-[1400px] px-4 text-center sm:px-6 lg:px-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+        {/* Mobile-Only Decorative Inner Frame */}
+        <div className="sm:hidden pointer-events-none absolute inset-x-3.5 top-24 bottom-4 border border-white/10 rounded-2xl z-[1]" />
+
+        <div className="relative z-10 mx-auto max-w-3xl px-5 sm:px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mx-auto max-w-4xl"
+            transition={{ duration: 0.5 }}
           >
-            <div className={`${mono.className} mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-slate-300 shadow-sm backdrop-blur-md`}>
-              <ShieldCheck size={16} className="text-[#B8AD76]" />
-              <span>Client Deployments</span>
+            <div className="inline-flex items-center justify-center gap-2.5 sm:gap-3 mb-3">
+              <span className="w-6 sm:w-8 h-[1.5px] bg-primary" />
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.25em] text-primary">
+                Case Study
+              </span>
+              <span className="w-6 sm:w-8 h-[1.5px] bg-primary" />
             </div>
-            
-            <h1 className="text-5xl font-black uppercase tracking-tighter text-white sm:text-7xl lg:text-[7.5rem] leading-none">
-              Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B8AD76] to-white/70">Works</span>
+
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-3 sm:mb-4">
+              Our <span className="text-primary">Work</span>
             </h1>
-            
-            <p className="mx-auto mt-8 max-w-2xl text-base text-slate-400 sm:text-xl font-light">
-              Explore our successful integrations of advanced surveillance, access control, and smart systems across industrial and residential spaces.
+
+            <p className="text-xs sm:text-lg text-gray-300 max-w-md sm:max-w-xl mx-auto leading-relaxed">
+              Practical, proportionate health and safety support delivering
+              measurable compliance improvements for UK clients.
             </p>
           </motion.div>
         </div>
+      </section>
 
-        <div className="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none">
-          <svg className="relative block w-full h-[40px] sm:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M1200 120L0 16.48V120h1200z" className="fill-slate-50"></path>
-          </svg>
+      {/* 2. FEATURED CASE STUDY DOSSIER */}
+      <section className="py-12 sm:py-20 lg:py-24 bg-white border-b border-gray-200/80">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          
+          {/* Case Study Title & Top 2x2 / 4-Col Metadata Strip */}
+          <div className="mb-8 sm:mb-14">
+            <div className="inline-flex items-center gap-2.5 mb-2.5 sm:mb-3">
+              <span className="w-7 h-[2px] bg-primary" />
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                Featured Project • Construction
+              </span>
+            </div>
+
+            <h2 className="text-2xl sm:text-4xl lg:text-[2.65rem] font-extrabold text-secondary tracking-tight leading-tight mb-6 sm:mb-8">
+              Principal Contractor{" "}
+              <span className="text-primary">CDM &amp; Site Safety Support</span>
+            </h2>
+
+            {/* 2-per-line on Mobile, 4-per-line on Desktop */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 bg-gray-200 gap-px border border-gray-200 rounded-2xl overflow-hidden shadow-2xs">
+              {projectMetrics.map((metric) => {
+                const Icon = metric.icon;
+                return (
+                  <div
+                    key={metric.label}
+                    className="bg-[#F8FAFC] p-3.5 sm:p-6 flex items-start gap-2.5 sm:gap-3.5"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-textLight">
+                        {metric.label}
+                      </span>
+                      <p className="text-xs sm:text-base font-extrabold text-secondary mt-0.5 truncate">
+                        {metric.value}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Main Case Study Split: Image + Challenge / Delivered / Result */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+            
+            {/* Left Column (5 Cols on Desktop): Project Photography + Desktop Key Outcomes */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="lg:col-span-5 flex flex-col gap-6"
+            >
+              <div className="relative aspect-[16/10] sm:aspect-[4/3] rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
+                <img
+                  src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1400&auto=format&fit=crop"
+                  alt="London Construction Site Safety Support"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-transparent to-transparent" />
+                <span className="absolute bottom-3.5 left-3.5 sm:bottom-4 sm:left-4 bg-white/95 backdrop-blur-xs text-secondary text-[10px] sm:text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full">
+                  Ongoing Retained Support
+                </span>
+              </div>
+
+              {/* Desktop Key Outcomes Block (Hidden on Mobile so it appears AFTER 03 The Result on phones) */}
+              <div className="hidden lg:block rounded-2xl bg-[#0B111E] text-white p-6 sm:p-7">
+                <span className="block text-[11px] font-bold uppercase tracking-[0.2em] text-primary mb-4">
+                  Key Project Outcomes
+                </span>
+                <div className="grid grid-cols-2 gap-3">
+                  {outcomes.map((outcome) => (
+                    <div
+                      key={outcome}
+                      className="bg-white/[0.05] border border-white/10 rounded-xl p-3 sm:p-3.5 flex items-start gap-2.5"
+                    >
+                      <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                        <Check size={11} strokeWidth={3} />
+                      </span>
+                      <span className="text-xs sm:text-sm font-semibold text-gray-100 leading-snug">
+                        {outcome}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Column (7 Cols on Desktop): 01 Challenge, 02 What We Delivered, 03 The Result */}
+            <div className="lg:col-span-7 space-y-6 sm:space-y-10">
+              
+              {/* 01 / The Challenge */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45 }}
+                className="bg-[#F8FAFC] sm:bg-transparent p-4 sm:p-0 rounded-2xl sm:rounded-none border border-gray-200/80 sm:border-0 sm:border-b sm:border-gray-200 sm:pb-8"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
+                  <span className="text-xs font-mono font-extrabold text-primary bg-primary/10 px-2.5 py-1 rounded-md">
+                    01
+                  </span>
+                  <h3 className="text-lg sm:text-2xl font-extrabold text-secondary tracking-tight">
+                    The Challenge
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-base text-textLight leading-relaxed">
+                  An initial health and safety audit identified gaps in the
+                  Principal Contractor&apos;s existing arrangements, including
+                  areas requiring improvement in CDM 2015 compliance, site safety
+                  management and documentation.
+                </p>
+              </motion.div>
+
+              {/* 02 / What We Delivered */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.05 }}
+                className="border-b border-gray-200 pb-6 sm:pb-8"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
+                  <span className="text-xs font-mono font-extrabold text-primary bg-primary/10 px-2.5 py-1 rounded-md">
+                    02
+                  </span>
+                  <h3 className="text-lg sm:text-2xl font-extrabold text-secondary tracking-tight">
+                    What We Delivered
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-base text-textLight leading-relaxed mb-4 sm:mb-5">
+                  Following the audit, we provided practical and cost-effective
+                  recommendations, prioritising actions according to risk and
+                  compliance requirements. Ongoing support included:
+                </p>
+
+                {/* 2-per-line on Mobile & Desktop */}
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                  {deliverables.map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center gap-2 sm:gap-2.5 bg-[#F8FAFC] border border-gray-200/80 border-l-2 border-l-primary sm:border-l-gray-200/80 rounded-xl px-2.5 py-2.5 sm:px-4 sm:py-3"
+                    >
+                      <span className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-primary/15 text-primary flex items-center justify-center shrink-0">
+                        <Check size={11} strokeWidth={3} />
+                      </span>
+                      <span className="text-[11px] sm:text-sm font-bold text-secondary leading-snug">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* 03 / The Result */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.1 }}
+                className="bg-[#F8FAFC] sm:bg-transparent p-4 sm:p-0 rounded-2xl sm:rounded-none border border-gray-200/80 sm:border-0"
+              >
+                <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
+                  <span className="text-xs font-mono font-extrabold text-primary bg-primary/10 px-2.5 py-1 rounded-md">
+                    03
+                  </span>
+                  <h3 className="text-lg sm:text-2xl font-extrabold text-secondary tracking-tight">
+                    The Result
+                  </h3>
+                </div>
+                <p className="text-xs sm:text-base text-textLight leading-relaxed">
+                  Our support helped the Principal Contractor close identified
+                  compliance gaps, strengthen CDM arrangements, and improve site
+                  safety standards across multiple projects. By focusing on
+                  practical and proportionate solutions, the client improved
+                  compliance while avoiding unnecessary costs and implementing
+                  controls appropriate to the actual risks on site.
+                </p>
+              </motion.div>
+
+              {/* Mobile-Only Key Outcomes Block (Appears right after 03 The Result on phones) */}
+              <div className="lg:hidden rounded-2xl bg-[#0B111E] text-white p-5">
+                <div className="flex items-center gap-2 mb-3.5">
+                  <span className="w-5 h-[2px] bg-primary" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">
+                    Key Project Outcomes
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {outcomes.map((outcome) => (
+                    <div
+                      key={outcome}
+                      className="bg-white/[0.05] border border-white/10 rounded-xl p-3 flex items-start gap-2"
+                    >
+                      <span className="w-4 h-4 rounded-full bg-primary/20 text-primary flex items-center justify-center shrink-0 mt-0.5">
+                        <Check size={10} strokeWidth={3} />
+                      </span>
+                      <span className="text-[11px] font-semibold text-gray-100 leading-snug">
+                        {outcome}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {/* ========================================== */}
-      {/* 2. MASONRY PORTFOLIO GRID                  */}
-      {/* ========================================== */}
-      <section className="relative py-16 sm:py-32">
-        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid grid-cols-12 gap-6 sm:gap-8 lg:gap-12">
-            {projects.map((project, idx) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className={`group relative overflow-hidden rounded-[2rem] sm:rounded-[3rem] ${project.colSpan} ${project.height}`}
-              >
-                {/* Background Image */}
-                <Image 
-                  src={project.image} 
-                  alt={project.title} 
-                  fill 
-                  className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
-                  priority={idx < 2}
-                />
-                
-                {/* Gradient Overlays */}
-                <div className={`absolute inset-0 transition-opacity duration-500 ${
-                  project.theme === 'dark' 
-                    ? 'bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent' 
-                    : 'bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent'
-                }`} />
+      {/* 3. OPEN EDITORIAL CLIENT TESTIMONIAL */}
+      <section className="py-12 sm:py-20 lg:py-24 bg-[#F8FAFC] border-b border-gray-200/80">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 lg:gap-12 items-start">
+            
+            <div className="lg:col-span-3 flex items-center gap-2.5 sm:gap-3 lg:pt-3">
+              <span className="w-6 sm:w-8 h-[2px] bg-primary shrink-0" />
+              <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-primary lg:text-secondary">
+                Client Feedback
+              </span>
+            </div>
 
-                {/* Top Badge */}
-                <div className="absolute left-6 top-6 sm:left-10 sm:top-10">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white backdrop-blur-md shadow-lg">
-                    <span className="relative flex h-2 w-2">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B8AD76] opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-[#B8AD76]" />
-                    </span>
-                    {project.id}
-                  </div>
+            <div className="lg:col-span-9">
+              <blockquote className="relative pl-3.5 sm:pl-0 border-l-2 border-primary/40 sm:border-l-0">
+                <span
+                  aria-hidden="true"
+                  className="hidden sm:block font-serif text-6xl leading-none text-primary select-none -mb-3"
+                >
+                  &ldquo;
+                </span>
+                <p className="text-lg sm:text-3xl lg:text-[2.1rem] font-bold text-secondary tracking-tight leading-[1.35] sm:leading-[1.3]">
+                  <span className="sm:hidden text-primary font-serif text-2xl leading-none mr-1">
+                    &ldquo;
+                  </span>
+                  Practical and cost-effective support that{" "}
+                  <span className="text-primary">
+                    significantly improved our site safety and CDM compliance.
+                  </span>{" "}
+                  Clear recommendations and professional support throughout our
+                  projects.
+                  <span className="sm:hidden text-primary font-serif text-2xl leading-none ml-1">
+                    &rdquo;
+                  </span>
+                </p>
+              </blockquote>
+
+              <div className="mt-5 pt-5 sm:mt-6 sm:pt-6 border-t border-gray-200 flex items-center justify-between gap-4">
+                <div>
+                  <p className="text-sm sm:text-lg font-extrabold text-secondary">
+                    Manoj Shahi
+                  </p>
+                  <p className="text-xs sm:text-sm text-textLight font-medium">
+                    Construction Manager, Byoot Construction Ltd, London
+                  </p>
                 </div>
 
-                {/* Content Area */}
-                <div className="absolute bottom-0 left-0 w-full p-6 sm:p-10 lg:p-14">
-                  <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-                    
-                    <div className="flex-1">
-                      <div className="mb-4 inline-flex items-center gap-2">
-                        <Radio size={14} className="text-[#B8AD76]" />
-                        <span className={`${mono.className} text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#B8AD76]`}>
-                          {project.category}
-                        </span>
-                      </div>
-                      <h2 className="mb-4 text-3xl font-black uppercase tracking-tight text-white sm:text-5xl">
-                        {project.title}
-                      </h2>
-                      <p className="max-w-xl text-sm sm:text-base font-light leading-relaxed text-slate-300">
-                        {project.description}
-                      </p>
-                    </div>
+                <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 px-3 py-1.5 rounded-full shrink-0">
+                  <Check size={12} strokeWidth={3} />
+                  Verified Client
+                </span>
+              </div>
+            </div>
 
-                    <div className="flex items-center gap-6 border-t border-white/20 pt-6 md:border-t-0 md:border-l md:pl-8 md:pt-0 shrink-0">
-                      {project.stats.map((stat, i) => (
-                        <div key={i} className="flex flex-col">
-                          <span className={`${mono.className} text-xl sm:text-2xl font-bold text-white`}>
-                            {stat.value}
-                          </span>
-                          <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                            {stat.label}
-                          </span>
-                        </div>
-                      ))}
-                      
-                      <Link href="/contact" className="ml-4 flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-900 shadow-xl transition-all hover:scale-110 hover:bg-[#B8AD76]">
-                        <ArrowUpRight size={20} />
-                      </Link>
-                    </div>
+          </div>
+        </div>
+      </section>
 
-                  </div>
-                </div>
-
-              </motion.div>
-            ))}
+      {/* 4. HOW WE WORKED (2+1 Bento Grid on Mobile, 3-Col on Desktop) */}
+      <section className="py-12 sm:py-20 bg-white border-b border-gray-200/80">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-8 sm:mb-10">
+            <div>
+              <div className="inline-flex items-center gap-2.5 mb-2">
+                <span className="w-7 h-[2px] bg-primary" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                  Our Methodology
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-secondary tracking-tight">
+                Why This Approach <span className="text-primary">Works</span>
+              </h2>
+            </div>
+            <p className="text-xs sm:text-sm text-textLight max-w-sm">
+              We don&apos;t just deliver reports—we help clients understand
+              findings and support them through implementation.
+            </p>
           </div>
 
+          {/* Mobile: 01 & 02 sit side-by-side (grid-cols-2), 03 spans full width below. Desktop: 3 equal columns */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
+            {approaches.map((app, idx) => {
+              const Icon = app.icon;
+              const isThird = idx === 2;
+              return (
+                <motion.div
+                  key={app.step}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.06 }}
+                  className={`group bg-[#F8FAFC] hover:bg-white rounded-2xl p-4 sm:p-8 border border-gray-200/90 hover:border-primary/50 transition-all duration-300 hover:shadow-md flex flex-col justify-between ${
+                    isThird ? "col-span-2 md:col-span-1" : "col-span-1"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-4 sm:mb-5">
+                    <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-secondary flex items-center justify-center transition-colors duration-300">
+                      <Icon className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={2.2} />
+                    </div>
+                    <span className="text-xs font-mono font-bold text-primary/40 sm:text-gray-300 group-hover:text-primary transition-colors">
+                      {app.step}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="text-sm sm:text-xl font-extrabold text-secondary mb-1.5 sm:mb-2 leading-snug">
+                      {app.title}
+                    </h3>
+                    <p className="text-[11px] sm:text-sm text-textLight leading-relaxed">
+                      {app.desc}
+                    </p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. GREEN CTA BANNER */}
+      <section className="bg-white py-10 sm:py-16 lg:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative rounded-2xl sm:rounded-3xl bg-primary p-6 sm:px-14 sm:py-16 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 sm:gap-8 overflow-hidden shadow-[0_20px_50px_rgba(34,197,94,0.18)] sm:shadow-none"
+          >
+            <div className="pointer-events-none absolute -right-16 -bottom-16 sm:-right-20 sm:-bottom-20 w-48 h-48 sm:w-80 sm:h-80 rounded-full border-[20px] sm:border-[32px] border-white/15" />
+
+            <div className="relative z-10 max-w-xl">
+              <h2 className="text-xl sm:text-4xl font-extrabold text-secondary tracking-tight leading-tight">
+                Facing Similar Compliance Challenges?
+              </h2>
+              <p className="text-secondary/85 text-xs sm:text-lg font-medium mt-2 leading-relaxed">
+                Let&apos;s discuss how we can support your business with
+                practical, cost-effective safety solutions.
+              </p>
+            </div>
+
+            <Link
+              href="/contact"
+              className="group relative z-10 inline-flex items-center justify-between sm:justify-start gap-3 sm:gap-4 bg-secondary hover:bg-gray-950 text-white font-bold text-xs sm:text-base pl-5 pr-1.5 py-1.5 sm:pl-7 sm:pr-2.5 sm:py-2.5 rounded-full transition-all duration-300 shadow-lg shrink-0"
+            >
+              <span>Discuss Your Needs</span>
+              <span className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-secondary flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
+                <ArrowUpRight size={16} strokeWidth={2.5} />
+              </span>
+            </Link>
+          </motion.div>
         </div>
       </section>
 

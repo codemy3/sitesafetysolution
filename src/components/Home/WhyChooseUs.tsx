@@ -1,178 +1,175 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { 
-  Blinds, 
-  Lightbulb, 
-  DoorOpen, 
-  Smartphone, 
-  ArrowRight, 
-  Sparkles, 
-  Wifi, 
-  Speaker,
-  Activity 
-} from 'lucide-react';
+import { motion } from "framer-motion";
+import {
+  ShieldCheck,
+  Compass,
+  HardHat,
+  Repeat,
+  FileSpreadsheet,
+  Scale,
+  Factory,
+  Warehouse,
+  Building2,
+  HeartPulse,
+  Utensils,
+  GraduationCap,
+  Home,
+  Plus,
+} from "lucide-react";
 
-const smartServices = [
+const reasons = [
   {
-    icon: Blinds,
-    title: 'Automatic Curtains',
-    desc: 'Motorized curtains that open and close on schedule, by voice, or via app — adding luxury and effortless comfort to your living space.',
+    num: "01",
+    title: "OSHCR Registered Consultant",
+    icon: ShieldCheck,
   },
   {
-    icon: Lightbulb,
-    title: 'Smart Lighting',
-    desc: 'Dimmers, motion-detecting lights, and scene control — set the perfect mood for any moment with intelligent illumination.',
+    num: "02",
+    title: "Practical and professional advice",
+    icon: Compass,
   },
   {
-    icon: DoorOpen,
-    title: 'Digital Door Locks',
-    desc: 'PIN, fingerprint, card, or app access — keyless entry solutions that combine advanced security with modern convenience.',
+    num: "03",
+    title: "Support for businesses and construction sites",
+    icon: HardHat,
   },
   {
-    icon: Smartphone,
-    title: 'Smart Switches',
-    desc: 'Control lights, fans, and appliances through touch panels, mobile apps, or voice assistants from anywhere in the world.',
+    num: "04",
+    title: "One-off or ongoing consultancy available",
+    icon: Repeat,
   },
   {
-    icon: Wifi,
-    title: 'Remote Gate Control',
-    desc: 'Open and close your gates remotely via app or automation — secure, convenient, and fully integrated with your smart home.',
+    num: "05",
+    title: "Bespoke health & safety documentation",
+    icon: FileSpreadsheet,
   },
   {
-    icon: Speaker,
-    title: 'Public Address Systems',
-    desc: 'Crystal-clear communication across wide areas — perfect for offices, schools, events, and commercial spaces.',
+    num: "06",
+    title: "Helping you meet your legal responsibilities",
+    icon: Scale,
   },
 ];
 
-const stagger = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
-};
+const sectors = [
+  { name: "Construction", icon: HardHat },
+  { name: "Manufacturing & Engineering", icon: Factory },
+  { name: "Warehousing & Logistics", icon: Warehouse },
+  { name: "Offices & Retail", icon: Building2 },
+  { name: "Care & Healthcare", icon: HeartPulse },
+  { name: "Hospitality & Leisure", icon: Utensils },
+  { name: "Education", icon: GraduationCap },
+  { name: "Property Management", icon: Home },
+  { name: "And More...", icon: Plus },
+];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
-
-export default function ModernTechSection() {
+export default function WhyChooseUs() {
   return (
-    <section className="relative overflow-hidden bg-[#0B0F0D] pb-20 pt-10 sm:pb-28 sm:pt-16">
-      
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20 pointer-events-none" />
-      
-      {/* Gold radial glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(184,173,118,0.12)_0%,transparent_70%)] pointer-events-none z-0" />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#111827] text-white border-t border-white/10">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         
-        {/* Top Section: Heading + Full Width Video */}
-        <div className="mb-16 sm:mb-24 flex flex-col items-center text-center">
+        {/* Main Exposed 1px Architectural Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 border-x border-white/10">
           
-          {/* Heading Content */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="mb-8 w-full max-w-5xl"
-          >
-            <div className="mb-4 flex items-center justify-center gap-2 text-xs font-mono tracking-[0.2em] text-[#B8AD76] uppercase">
-              <Activity size={14} className="animate-pulse" />
-              <span>SMART LIVING // HOME AUTOMATION</span>
+          {/* 1. LEFT COLUMN (5 Cols on Desktop): Heading (Top) + Sectors (Bottom on Desktop) */}
+          <div className="order-1 lg:col-span-5 p-6 sm:p-10 lg:p-12 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10">
+            <div>
+              <div className="inline-flex items-center gap-2.5 mb-3">
+                <span className="w-6 h-[2px] bg-primary" />
+                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-primary">
+                  Why Choose Us
+                </span>
+              </div>
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-[1.15]">
+                Why Choose <br />
+                <span className="text-primary">
+                  Site Safety Solutions Ltd?
+                </span>
+              </h2>
             </div>
 
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl lg:whitespace-nowrap">
-              Transform Your Space With{' '}
-              <span className="relative inline-block">
-                <span className="relative z-10 text-[#B8AD76]">Modern Technology</span>
-                <span className="absolute bottom-1 left-0 right-0 h-3 bg-[#B8AD76]/10 z-0 rounded" />
-              </span>
-            </h2>
-          </motion.div>
-
-          {/* Centered Video Showcase (Restoring Original Style) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative w-full max-w-4xl mx-auto"
-          >
-            {/* Corner brackets */}
-            <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-[#B8AD76]/60 pointer-events-none hidden sm:block z-20" />
-            <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-[#B8AD76]/60 pointer-events-none hidden sm:block z-20" />
-
-            <div className="relative overflow-hidden rounded-[2rem] border border-slate-700/50 bg-slate-900 p-2 sm:p-3 shadow-2xl shadow-black/40 transition-all duration-500 hover:shadow-[0_0_50px_rgba(184,173,118,0.15)] hover:border-[#B8AD76]/40">
-              <div className="relative overflow-hidden rounded-[1.5rem]">
-                <video
-                  src="/morden-tech.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="h-72 w-full object-cover sm:h-[420px] lg:h-[500px]"
-                />
-                {/* Floating overlay label */}
-                <div className="absolute top-4 left-4 rounded-full border border-white/10 bg-black/60 px-3.5 py-1.5 text-[11px] font-mono tracking-wider text-white backdrop-blur-md flex items-center gap-2 shadow-lg">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#B8AD76] opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#B8AD76]" />
-                  </span>
-                  <span>LIVE DEMO</span>
-                </div>
+            {/* Desktop Sectors Block (Hidden on Mobile so it doesn't push the 6 reasons down) */}
+            <div className="hidden lg:block mt-12 pt-8 border-t border-white/10">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-white/50 mb-4">
+                All Sectors Covered
+              </p>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                {sectors.map((sector, index) => {
+                  const SectorIcon = sector.icon;
+                  return (
+                    <div
+                      key={index}
+                      className="flex items-center gap-2 text-[13px] text-gray-300 hover:text-white transition-colors"
+                    >
+                      <SectorIcon size={14} className="text-primary shrink-0" />
+                      <span className="truncate">{sector.name}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
 
-        {/* Bottom Section: Service Cards Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={stagger}
-        >
-          <motion.div variants={fadeUp} className="mb-10 flex items-center gap-3">
-            <Sparkles size={18} className="text-[#B8AD76]" />
-            <h3 className="text-lg font-bold text-white sm:text-xl">Our Smart Home Solutions</h3>
-            <div className="hidden sm:block flex-1 h-px bg-slate-800 ml-4" />
-          </motion.div>
-
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
-            {smartServices.map((service, index) => {
-              const Icon = service.icon;
+          {/* 2. RIGHT COLUMN (7 Cols on Desktop): Sharp 2x3 Hairline Matrix */}
+          <div className="order-2 lg:col-span-7 grid grid-cols-2 bg-white/10 gap-px">
+            {reasons.map((item, index) => {
+              const Icon = item.icon;
               return (
                 <motion.div
-                  key={service.title}
-                  variants={fadeUp}
-                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-slate-800 bg-slate-900/60 p-3 sm:p-6 backdrop-blur-sm transition-all duration-300 hover:border-[#B8AD76]/50 hover:bg-slate-800/80 hover:shadow-lg hover:shadow-[#B8AD76]/5"
+                  key={item.num}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  className="group relative bg-[#111827] hover:bg-[#162033] p-4 sm:p-8 lg:p-9 flex flex-col justify-between min-h-[118px] sm:min-h-[175px] transition-colors duration-300"
                 >
-                  {/* Gold accent bar on hover */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-transparent transition-colors duration-300 group-hover:bg-[#B8AD76]" />
-                  
-                  {/* Mobile: vertical stack | Desktop: horizontal */}
-                  <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-start sm:gap-4">
-                    <div className="rounded-lg sm:rounded-xl bg-[#B8AD76]/10 p-2 sm:p-3 text-[#B8AD76] ring-1 ring-[#B8AD76]/20 shrink-0 transition-all duration-300 group-hover:bg-[#B8AD76]/20 group-hover:ring-[#B8AD76]/40">
-                      <Icon size={18} className="sm:w-[22px] sm:h-[22px]" />
+                  {/* Top Row: Minimal Icon + Number */}
+                  <div className="flex items-center justify-between mb-3 sm:mb-6">
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-gray-950 transition-colors duration-300">
+                      <Icon
+                        className="w-4 h-4 sm:w-5 sm:h-5"
+                        strokeWidth={2}
+                      />
                     </div>
-                    <div className="min-w-0">
-                      <h4 className="font-bold text-white text-xs sm:text-base group-hover:text-[#B8AD76] transition-colors leading-tight">
-                        {service.title}
-                      </h4>
-                      <p className="hidden sm:block mt-1.5 text-sm leading-relaxed text-slate-400 font-light">
-                        {service.desc}
-                      </p>
-                    </div>
+                    <span className="text-[11px] sm:text-xs font-mono font-bold text-white/30 group-hover:text-primary transition-colors">
+                      {item.num}
+                    </span>
                   </div>
+
+                  {/* Bottom Row: Statement */}
+                  <h3 className="text-[13px] sm:text-[17px] font-bold text-white leading-snug">
+                    {item.title}
+                  </h3>
+
+                  {/* Subtle Bottom Hover Line */}
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-primary transition-all duration-300 group-hover:w-full" />
                 </motion.div>
               );
             })}
           </div>
-        </motion.div>
+
+          {/* 3. MOBILE-ONLY SECTORS BLOCK (Appears cleanly AFTER the 6 reasons on phones) */}
+          <div className="order-3 lg:hidden p-6 sm:p-8 border-t border-white/10 bg-[#0D131F]">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary mb-3.5">
+              All Sectors Covered
+            </p>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-2.5">
+              {sectors.map((sector, index) => {
+                const SectorIcon = sector.icon;
+                return (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 text-xs text-gray-300"
+                  >
+                    <SectorIcon size={13} className="text-primary shrink-0" />
+                    <span className="truncate">{sector.name}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+        </div>
 
       </div>
     </section>
