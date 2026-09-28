@@ -33,10 +33,10 @@ export default function HeroSection() {
 
           {/* Strict 2-Line Headline */}
           <h1 className="text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[3.25rem] font-extrabold text-white uppercase tracking-tight sm:leading-[1.1] mb-4 sm:mb-5">
-            <span className="block whitespace-nowrap">
+            <span className="block sm:whitespace-nowrap">
               Practical &amp; Compliant
             </span>
-            <span className="block whitespace-nowrap">
+            <span className="block sm:whitespace-nowrap">
               Site Safety <span className="text-primary">Solutions.</span>
             </span>
           </h1>
@@ -51,13 +51,13 @@ export default function HeroSection() {
           </div>
 
           {/* Action Row — Side-by-side on mobile (grid-cols-2), original flex on desktop */}
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2.5 sm:gap-4 mb-6 sm:mb-9">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-6 sm:mb-9">
             <Link
               href="/contact"
               className="group relative inline-flex items-center justify-between sm:justify-start gap-2 sm:gap-4 bg-white text-gray-950 font-bold text-xs sm:text-sm pl-4 pr-1.5 py-1.5 sm:pl-6 sm:pr-2 sm:py-2 rounded-full overflow-hidden transition-colors duration-300 shadow-xl"
             >
               <span className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
-              <span className="relative z-10 group-hover:text-gray-950 transition-colors truncate">
+              <span className="relative z-10 group-hover:text-gray-950 transition-colors">
                 Book Consultation
               </span>
               <span className="relative z-10 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gray-950 text-white flex items-center justify-center shrink-0 overflow-hidden">
@@ -81,7 +81,7 @@ export default function HeroSection() {
                 size={15}
                 className="relative z-10 text-primary shrink-0 transition-transform duration-300 group-hover:rotate-12"
               />
-              <span className="relative z-10 truncate">Explore 9 Services</span>
+              <span className="relative z-10">Explore 9 Services</span>
             </Link>
           </div>
 
