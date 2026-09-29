@@ -22,7 +22,7 @@ const services = [
       "Prioritised action plan delivered in 5–7 days",
     ],
     tags: ["PAS 79 Aligned", "Statutory Duty"],
-    image: "/images/service1.png",
+    image: "/images/service1.webp",
     link: "/fire-risk-assessments",
     cta: "Explore Fire Risk Page",
   },
@@ -42,7 +42,7 @@ const services = [
       "Fast turnaround for urgent site mobilisation",
     ],
     tags: ["Bespoke RAMS", "Contractor Approved"],
-    image: "/images/service2.png",
+    image: "/images/service2.webp",
     link: "/contact",
     cta: "Request RAMS Support",
   },
@@ -62,7 +62,7 @@ const services = [
       "Annual policy reviews & legislative updates",
     ],
     tags: ["5+ Employees Legal Duty", "Bespoke Manuals"],
-    image: "/images/service3.png",
+    image: "/images/service3.webp",
     link: "/contact",
     cta: "Enquire About Policies",
   },
@@ -82,7 +82,7 @@ const services = [
       "Proportionate, cost-effective recommendations",
     ],
     tags: ["On-Site Visits", "Actionable Reports"],
-    image: "/images/service4.png",
+    image: "/images/service4.webp",
     link: "/contact",
     cta: "Book a Site Inspection",
   },
@@ -102,7 +102,7 @@ const services = [
       "Ongoing site safety compliance monitoring",
     ],
     tags: ["CDM 2015", "Principal Contractors"],
-    image: "/images/service5.png",
+    image: "/images/service5.webp",
     link: "/contact",
     cta: "Get CDM Support",
   },
@@ -122,7 +122,7 @@ const services = [
       "Clear operative-friendly COSHH assessment sheets",
     ],
     tags: ["UK COSHH Regs", "Hazard Control"],
-    image: "/images/service6.png",
+    image: "/images/service6.webp",
     link: "/contact",
     cta: "Request COSHH Support",
   },
@@ -142,7 +142,7 @@ const services = [
       "Practical corrective action plans",
     ],
     tags: ["RIDDOR Guidance", "Root Cause Analysis"],
-    image: "/images/service7.png",
+    image: "/images/service7.webp",
     link: "/contact",
     cta: "Speak to a Consultant",
   },
@@ -158,11 +158,12 @@ const services = [
       "Practical health and safety training and targeted toolbox talks tailored to your actual site risks—helping operatives understand and follow safe systems of work.",
     bullets: [
       "Site inductions & task-specific toolbox talks",
+      "Virtual site specific training",
       "Plain-English delivery with zero jargon",
       "Attendance records to evidence workforce training",
     ],
     tags: ["On-Site Briefings", "Operative Focused"],
-    image: "/images/service8.png",
+    image: "/images/service8.webp",
     link: "/contact",
     cta: "Arrange Site Training",
   },
@@ -182,9 +183,29 @@ const services = [
       "Cost-effective alternative to an in-house H&S manager",
     ],
     tags: ["Retained Support", "OSHCR Registered"],
-    image: "/images/service9.png",
+    image: "/images/service9.webp",
     link: "/contact",
     cta: "Discuss Ongoing Support",
+  },
+  {
+    id: "service-10",
+    num: "10",
+    shortNav: "RISK ASSESS.",
+    eyebrow: "RISK ASSESSMENTS",
+    subEyebrow: "MHSWR 1999 COMPLIANT",
+    titleWhite: "RISK",
+    titleAccent: "ASSESSMENTS",
+    description:
+      "Comprehensive Risk Assessments under the Management of Health and Safety at Work Regulations 1999 UK, identifying hazards and ensuring your business is fully compliant.",
+    bullets: [
+      "Full site hazard identification",
+      "Compliance with MHSWR 1999 UK",
+      "Actionable risk reduction strategies",
+    ],
+    tags: ["MHSWR 1999", "Risk Control"],
+    image: "/images/service4.webp", // reusing an image
+    link: "/contact",
+    cta: "Request Risk Assessment",
   },
 ];
 
@@ -230,7 +251,7 @@ export default function ServicesPage() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url("/images/service-hero.png")',
+            backgroundImage: 'url("/images/service-hero.webp")',
           }}
         >
           <div className="absolute inset-0 bg-[#0B111E]/85" />
@@ -268,10 +289,10 @@ export default function ServicesPage() {
       {/* 2. STICKY TOP FILTER BAR — All 9 Services Visible on Mobile (5+4 Grid) & Desktop (9-Col Row) */}
       <div className="sticky top-[74px] sm:top-[86px] z-40 bg-white/95 backdrop-blur-md border-y border-gray-200 shadow-sm">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-5 sm:grid-cols-9 bg-gray-200/80 gap-px border-x border-gray-200/80">
+          <div className="grid grid-cols-5 sm:grid-cols-10 bg-gray-200/80 gap-px border-x border-gray-200/80">
             {services.map((item, idx) => {
               const isActive = activeService === item.id;
-              const isLastMobileItem = idx === 8;
+              const isLastMobileItem = idx === 9;
               return (
                 <button
                   key={item.num}
@@ -396,7 +417,7 @@ export default function ServicesPage() {
                     </Link>
 
                     <span className="text-xs font-mono font-bold text-white/30">
-                      {service.num} / 09
+                      {service.num} / 10
                     </span>
                   </div>
                 </div>

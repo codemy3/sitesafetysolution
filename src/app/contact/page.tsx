@@ -15,17 +15,60 @@ import {
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMsg("");
+    setLoading(true);
 
-    // TODO: Connect this form to the actual email/form service before launch.
-    setSubmitted(true);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-    setTimeout(() => {
-      setSubmitted(false);
-      e.currentTarget.reset();
-    }, 4000);
+    // If honeypot field has value, silently "succeed"
+    if (formData.get("_gotcha")) {
+      setSubmitted(true);
+      setLoading(false);
+      return;
+    }
+
+    const payload = {
+      name: formData.get("name"),
+      company: formData.get("company"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+      service: formData.get("service"),
+      message: formData.get("message"),
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        setErrorMsg(
+          data.error ||
+            "Something went wrong. Please try again or contact us directly."
+        );
+        setLoading(false);
+        return;
+      }
+
+      setSubmitted(true);
+      setLoading(false);
+      form.reset();
+    } catch {
+      setErrorMsg(
+        "Could not send your enquiry. Please check your connection and try again, or call us directly on 07468 010989."
+      );
+      setLoading(false);
+    }
   };
 
   return (
@@ -253,7 +296,21 @@ export default function ContactPage() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
-                    
+                    {/* Honeypot anti-spam field — hidden from real users */}
+                    <input
+                      type="text"
+                      name="_gotcha"
+                      autoComplete="off"
+                      tabIndex={-1}
+                      className="absolute opacity-0 pointer-events-none h-0 w-0"
+                    />
+
+                    {/* Error Message */}
+                    {errorMsg && (
+                      <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs sm:text-sm text-red-700 font-medium">
+                        {errorMsg}
+                      </div>
+                    )}
                     {/* Row 1: Name + Company (2-per-line on Mobile & Desktop) */}
                     <div className="grid grid-cols-2 gap-3 sm:gap-5">
                       <div>
@@ -405,9 +462,10 @@ export default function ContactPage() {
 
                       <button
                         type="submit"
-                        className="group order-1 sm:order-2 inline-flex items-center justify-center gap-3 bg-secondary hover:bg-primary text-white hover:text-secondary font-bold text-xs sm:text-sm pl-7 pr-2 py-2 rounded-full transition-all duration-300 shadow-md shrink-0 cursor-pointer"
+                        disabled={loading}
+                        className="group order-1 sm:order-2 inline-flex items-center justify-center gap-3 bg-secondary hover:bg-primary text-white hover:text-secondary font-bold text-xs sm:text-sm pl-7 pr-2 py-2 rounded-full transition-all duration-300 shadow-md shrink-0 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:bg-secondary disabled:hover:text-white"
                       >
-                        <span>Send Enquiry</span>
+                        <span>{loading ? "Sending…" : "Send Enquiry"}</span>
                         <span className="w-9 h-9 rounded-full bg-primary group-hover:bg-secondary text-secondary group-hover:text-white flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
                           <ArrowUpRight size={16} strokeWidth={2.5} />
                         </span>

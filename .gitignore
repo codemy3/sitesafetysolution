@@ -9,3 +9,6 @@ yarn-error.log*
 pnpm-lock.yaml
 .idea
 dist
+.env
+.env.local
+.env*.local

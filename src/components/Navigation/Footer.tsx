@@ -18,7 +18,7 @@ export default function Footer() {
           <div className="flex flex-col items-start justify-start lg:col-span-4">
             <Link href="/" className="mb-4 sm:mb-5 inline-block">
               <Image
-                src="/logo-bg-black.png"
+                src="/logo-bg-black.webp"
                 alt="Site Safety Solutions Ltd"
                 width={220}
                 height={80}

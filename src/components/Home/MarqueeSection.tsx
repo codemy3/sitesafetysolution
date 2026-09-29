@@ -12,12 +12,12 @@ const accreditations = [
   },
   {
     acronym: "IOSH",
-    logo: "/images/IOSH.png",
+    logo: "/images/IOSH.webp",
     sizeClass: "w-44 sm:w-52 lg:w-60 h-12 sm:h-14 lg:h-16",
   },
   {
     acronym: "IIRSM",
-    logo: "/images/iism.png",
+    logo: "/images/iism.webp",
     sizeClass: "w-40 sm:w-48 lg:w-56 h-11 sm:h-14 lg:h-15",
   },
 ];

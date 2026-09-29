@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 const suitableFor = [
+  "Commercial premises",
   "Offices & retail",
   "Warehouses & industrial",
   "Hospitality & care",
@@ -28,7 +29,7 @@ const includedComponents = [
     num: "01",
     icon: Search,
     title: "Site Inspection",
-    desc: "On-site inspection of escape routes, fire doors, alarms, lighting, signage, and hazards.",
+    desc: "We visit your premises to assess fire safety measures, identify potential risks, inspect fire compartments wall and PEEP arrangements, and ensure your property meets current fire safety requirements.",
   },
   {
     num: "02",
@@ -156,7 +157,7 @@ export default function FireRiskAssessmentsPage() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url(/images/firerisk-hero.png)",
+            backgroundImage: "url(/images/firerisk-hero.webp)",
           }}
         >
           <div className="absolute inset-0 bg-[#0B111E]/85" />
@@ -238,7 +239,7 @@ export default function FireRiskAssessmentsPage() {
               </h2>
 
               <p className="text-xs sm:text-lg text-textLight leading-relaxed mb-5 sm:mb-8">
-                We assess your premises, identify fire hazards and people at
+                Using the industry-standard PAS 79 methodology, we assess your premises, identify fire hazards and people at
                 risk, review existing fire safety measures, and provide a clear,
                 prioritised action plan to help you meet your responsibilities.
               </p>
@@ -278,7 +279,7 @@ export default function FireRiskAssessmentsPage() {
 
               <div className="relative z-10 aspect-[16/10] sm:aspect-[4/3] rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
                 <img
-                  src="/images/firerisk.png"
+                  src="/images/firerisk.webp"
                   alt="Premises Fire Safety Inspection"
                   className="w-full h-full object-cover"
                 />

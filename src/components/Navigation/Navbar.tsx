@@ -80,7 +80,7 @@ export default function Navbar() {
             className="flex items-center shrink-0"
           >
             <Image
-              src="/logo-bg-white.png"
+              src="/logo-bg-white.webp"
               alt="Site Safety Solutions Ltd"
               width={200}
               height={70}

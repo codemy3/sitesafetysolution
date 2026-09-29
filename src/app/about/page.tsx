@@ -33,21 +33,21 @@ const howWeWork = [
     title: "Tailored to Your Site",
     description:
       "Bespoke risk assessments, policies, and audits built around your actual operations.",
-    image: "/images/hww1.png",
+    image: "/images/hww1.webp",
   },
   {
     step: "02",
     title: "Clear, Jargon-Free Advice",
     description:
       "Straightforward guidance so you know exactly what is required to stay compliant.",
-    image: "/images/hww2.png",
+    image: "/images/hww2.webp",
   },
   {
     step: "03",
     title: "Practical & Cost-Effective",
     description:
       "Proportionate safety controls that protect your workforce without unnecessary expense.",
-    image: "/images/hww3.png",
+    image: "/images/hww3.webp",
   },
 ];
 
@@ -60,7 +60,7 @@ export default function AboutPage() {
         <div
           className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url("/images/about-hero.png")',
+            backgroundImage: 'url("/images/about-hero.webp")',
           }}
         >
           <div className="absolute inset-0 bg-[#0B111E]/82" />
@@ -114,7 +114,7 @@ export default function AboutPage() {
               {/* Main Large Image */}
               <div className="relative z-10 aspect-[16/11] sm:aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border border-gray-200">
                 <img
-                  src="/images/about1.jpg"
+                  src="/images/about1.webp"
                   alt="Construction Site Management"
                   className="w-full h-full object-cover"
                 />
@@ -132,7 +132,7 @@ export default function AboutPage() {
               {/* Overlapping Secondary Image */}
               <div className="absolute bottom-0 right-0 z-20 w-40 sm:w-60 aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
                 <img
-                  src="/images/about2.jpg"
+                  src="/images/about2.webp"
                   alt="Safety Engineering Inspection"
                   className="w-full h-full object-cover"
                 />

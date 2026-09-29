@@ -11,7 +11,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 z-0 bg-cover bg-[72%_center] sm:bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url("/images/hero.png")',
+          backgroundImage: 'url("/images/hero.webp")',
         }}
       >
         {/* Mobile Overlay: Top-to-Bottom Editorial Gradient so top image is clear & bottom text is crisp */}
@@ -45,8 +45,7 @@ export default function HeroSection() {
           <div className="relative pl-3.5 sm:pl-4 border-l-2 border-primary mb-6 sm:mb-8 max-w-lg">
             <p className="text-xs sm:text-[15px] text-gray-200/95 leading-relaxed">
               OSHCR Registered Consultant providing practical, reliable and
-              cost-effective health and safety consultancy, RAMS documentation,
-              and site support across all UK sectors.
+              cost-effective health and safety consultancy, CDM support ( PCI, CPP and RAMS ) and site support industry, manufacturing, warehouse, care home, hospitality and all sector in UK.
             </p>
           </div>
 
@@ -81,7 +80,7 @@ export default function HeroSection() {
                 size={15}
                 className="relative z-10 text-primary shrink-0 transition-transform duration-300 group-hover:rotate-12"
               />
-              <span className="relative z-10">Explore 9 Services</span>
+              <span className="relative z-10">Explore 10 Services</span>
             </Link>
           </div>
 

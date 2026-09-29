@@ -1,30 +1,56 @@
 import { MetadataRoute } from 'next';
 
+const BASE_URL = 'https://sitesafety-solutions.co.uk';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://techfin.example.com',
+      url: BASE_URL,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1
+      changeFrequency: 'weekly',
+      priority: 1,
     },
     {
-      url: 'https://techfin.example.com/about',
+      url: `${BASE_URL}/about`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8
+      priority: 0.8,
     },
     {
-      url: 'https://techfin.example.com/services',
+      url: `${BASE_URL}/services`,
       lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8
+      changeFrequency: 'weekly',
+      priority: 0.9,
     },
     {
-      url: 'https://techfin.example.com/contact',
+      url: `${BASE_URL}/fire-risk-assessments`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8
-    }
+      priority: 0.9,
+    },
+    {
+      url: `${BASE_URL}/work`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/contact`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/privacy`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${BASE_URL}/terms`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
   ];
 }

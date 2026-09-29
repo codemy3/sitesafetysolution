@@ -10,10 +10,10 @@ const priorityServices = [
     number: "01",
     title: "Fire Risk Assessments",
     href: "/fire-risk-assessments",
-    image:
-      "/images/service1.png",
-    // Card 01: High Crest (Mobile left col: mt-0 | Laptop: mt-0)
-    offsetClass: "mt-0 md:mt-0",
+    image: "/images/service1.webp",
+    // 01: Top Left - Wave Crest
+    gridClass: "col-span-1 md:col-span-2 lg:col-span-2",
+    offsetClass: "mt-0",
     mobileDesc: "PAS 79 compliant assessments & clear fire safety action plans.",
     description: (
       <>
@@ -34,10 +34,10 @@ const priorityServices = [
     number: "02",
     title: "RAMS & Method Statements",
     href: "/services",
-    image:
-      "/images/service2.png",
-    // Card 02: Low Dip (Mobile right col: mt-6 | Laptop: mt-16 / lg:mt-20)
-    offsetClass: "mt-6 sm:mt-8 md:mt-16 lg:mt-20",
+    image: "/images/service2.webp",
+    // 02: Top Center - Wave Dip
+    gridClass: "col-span-1 md:col-span-2 lg:col-span-2",
+    offsetClass: "mt-6 sm:mt-8 lg:mt-12",
     mobileDesc: "Task-specific RAMS documentation tailored for site compliance.",
     description: (
       <>
@@ -57,10 +57,10 @@ const priorityServices = [
     number: "03",
     title: "H&S Policies & Procedures",
     href: "/services",
-    image:
-      "/images/service3.png",
-    // Card 03: Rises Back Up (Mobile left col: -mt-2 | Laptop: md:mt-4 / lg:mt-6)
-    offsetClass: "-mt-2 sm:mt-0 md:mt-4 lg:mt-6",
+    image: "/images/service3.webp",
+    // 03: Top Right - Wave Crest
+    gridClass: "col-span-1 md:col-span-2 lg:col-span-2",
+    offsetClass: "-mt-2 sm:mt-0 lg:mt-4",
     mobileDesc: "Bespoke H&S policies & manuals required for 5+ employees.",
     description: (
       <>
@@ -80,10 +80,10 @@ const priorityServices = [
     number: "04",
     title: "Site Inspections & Audits",
     href: "/services",
-    image:
-      "/images/service4.png",
-    // Card 04: Deepest Wave Dip (Mobile right col: mt-4 | Laptop: md:mt-20 / lg:mt-24)
-    offsetClass: "mt-4 sm:mt-8 md:mt-20 lg:mt-24",
+    image: "/images/service4.webp",
+    // 04: Bottom Left (Centered) - Wave Dip
+    gridClass: "col-span-1 md:col-span-2 lg:col-start-2 lg:col-span-2",
+    offsetClass: "mt-5 sm:mt-8 lg:mt-12",
     mobileDesc: "Independent workplace & construction site compliance audits.",
     description: (
       <>
@@ -96,6 +96,25 @@ const priorityServices = [
           proportionate, cost-effective solutions
         </strong>{" "}
         across all UK sectors.
+      </>
+    ),
+  },
+  {
+    number: "05",
+    title: "Risk Assessment",
+    href: "/services",
+    image: "/images/service9.webp",
+    // 05: Bottom Right (Centered) - Wave Crest. On mobile/tablet, spans full width as a feature card!
+    gridClass: "col-span-2 md:col-span-4 lg:col-span-2",
+    offsetClass: "mt-4 sm:mt-8 lg:mt-4",
+    mobileDesc: "Risk Assessment under Management of Health & Safety at Work Regulations 1999 UK.",
+    description: (
+      <>
+        Comprehensive{" "}
+        <strong className="font-bold text-secondary">
+          Risk Assessments
+        </strong>{" "}
+        to ensure compliance under the Management of Health and Safety at Work Regulations 1999 UK, keeping your workplace safe and legally sound.
       </>
     ),
   },
@@ -164,96 +183,110 @@ export default function ServicesOverview() {
 
           <p className="text-xs sm:text-base text-textLight leading-relaxed px-2">
             Practical, proportionate health and safety support focused on the
-            four essential compliance areas UK businesses need most.
+            five essential compliance areas UK businesses need most.
           </p>
         </div>
 
-        {/* 3. Staggered Wave Cards (2x2 Staggered on Mobile, 4-Col Wave on Laptop/Desktop) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 lg:gap-7 items-start">
-          {priorityServices.map((service, index) => (
-            <motion.div
-              key={service.number}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.55, delay: index * 0.1 }}
-              className={`group flex flex-col items-center ${service.offsetClass}`}
-            >
-              {/* Outer Animated Border Wrapper */}
-              <Link
-                href={service.href}
-                className="relative w-full p-[1.5px] sm:p-[2px] rounded-2xl bg-gray-200/80 overflow-hidden shadow-[0_14px_35px_rgba(15,23,42,0.07)] hover:shadow-[0_25px_60px_rgba(34,197,94,0.22)] transition-all duration-500 hover:-translate-y-2"
+        {/* 3. The 3-Top / 2-Bottom Grid Strategy */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-6 lg:gap-7 items-start">
+          {priorityServices.map((service, index) => {
+            // Check if this is the 5th card on mobile so we can optimize its aspect ratio
+            const isWideMobileCard = index === 4;
+
+            return (
+              <motion.div
+                key={service.number}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.55, delay: index * 0.1 }}
+                className={`group flex flex-col items-center ${service.gridClass} ${service.offsetClass}`}
               >
-                {/* Continuous Rotating Emerald Laser Border Beam */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    duration: 7,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  style={{
-                    background:
-                      "conic-gradient(from 0deg, transparent 0deg 250deg, #22C55E 290deg, #059669 330deg, transparent 360deg)",
-                  }}
-                  className="pointer-events-none absolute -inset-[120%] opacity-75 group-hover:opacity-100 transition-opacity duration-300"
-                />
+                {/* Outer Animated Border Wrapper */}
+                <Link
+                  href={service.href}
+                  className="relative w-full p-[1.5px] sm:p-[2px] rounded-2xl bg-gray-200/80 overflow-hidden shadow-[0_14px_35px_rgba(15,23,42,0.07)] hover:shadow-[0_25px_60px_rgba(34,197,94,0.22)] transition-all duration-500 hover:-translate-y-2"
+                >
+                  {/* Continuous Rotating Emerald Laser Border Beam */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 7,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    style={{
+                      background:
+                        "conic-gradient(from 0deg, transparent 0deg 250deg, #22C55E 290deg, #059669 330deg, transparent 360deg)",
+                    }}
+                    className="pointer-events-none absolute -inset-[120%] opacity-75 group-hover:opacity-100 transition-opacity duration-300"
+                  />
 
-                {/* Top-Left & Bottom-Right Architectural Corner Brackets */}
-                <span className="pointer-events-none absolute top-0 left-0 w-3.5 h-3.5 sm:w-4 sm:h-4 border-t-2 border-l-2 border-primary rounded-tl-2xl z-20" />
-                <span className="pointer-events-none absolute bottom-0 right-0 w-3.5 h-3.5 sm:w-4 sm:h-4 border-b-2 border-r-2 border-primary rounded-br-2xl z-20" />
+                  {/* Top-Left & Bottom-Right Architectural Corner Brackets */}
+                  <span className="pointer-events-none absolute top-0 left-0 w-3.5 h-3.5 sm:w-4 sm:h-4 border-t-2 border-l-2 border-primary rounded-tl-2xl z-20" />
+                  <span className="pointer-events-none absolute bottom-0 right-0 w-3.5 h-3.5 sm:w-4 sm:h-4 border-b-2 border-r-2 border-primary rounded-br-2xl z-20" />
 
-                {/* Inner White Card Surface */}
-                <div className="relative z-10 w-full h-full bg-white rounded-[14px] flex flex-col overflow-hidden">
-                  {/* Top Image Frame */}
-                  <div className="relative w-full h-28 sm:h-48 lg:h-56 overflow-hidden bg-gray-100">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-secondary/45 via-transparent to-transparent" />
+                  {/* Inner White Card Surface */}
+                  <div className="relative z-10 w-full h-full bg-white rounded-[14px] flex flex-col overflow-hidden">
+                    {/* Top Image Frame */}
+                    <div
+                      className={`relative w-full overflow-hidden bg-gray-100 ${
+                        isWideMobileCard
+                          ? "h-40 sm:h-64 lg:h-56" // Gives the wide mobile card a beautiful landscape proportion
+                          : "h-28 sm:h-48 lg:h-56"
+                      }`}
+                    >
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-secondary/45 via-transparent to-transparent" />
 
-                    {/* Corner Action Badge */}
-                    <span className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white/95 text-secondary group-hover:bg-primary group-hover:text-white flex items-center justify-center shadow-md transition-all duration-300 group-hover:rotate-45">
-                      <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" strokeWidth={2.5} />
-                    </span>
-                  </div>
-
-                  {/* Text Block — Clean & Concise on Mobile, Full Editorial on Desktop */}
-                  <div className="p-3 sm:px-5 sm:pt-5 sm:pb-6 text-center flex-1 flex flex-col justify-between relative">
-                    <div>
-                      <h3 className="text-[13px] sm:text-base lg:text-[17px] font-extrabold text-secondary group-hover:text-primary transition-colors mb-1.5 sm:mb-2.5 leading-snug">
-                        {service.title}
-                      </h3>
-
-                      {/* Mobile Concise Copy (Prevents tiny cramped wall of text) */}
-                      <p className="sm:hidden text-[11px] text-gray-600 leading-relaxed">
-                        {service.mobileDesc}
-                      </p>
-
-                      {/* Tablet & Laptop Full Highlighted Copy */}
-                      <p className="hidden sm:block text-xs lg:text-[13.5px] text-gray-600 leading-[1.7]">
-                        {service.description}
-                      </p>
+                      {/* Corner Action Badge */}
+                      <span className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white/95 text-secondary group-hover:bg-primary group-hover:text-white flex items-center justify-center shadow-md transition-all duration-300 group-hover:rotate-45">
+                        <ArrowUpRight
+                          className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                          strokeWidth={2.5}
+                        />
+                      </span>
                     </div>
 
-                    {/* Bottom Animated Accent Line Inside Card */}
-                    <span className="mx-auto mt-2.5 sm:mt-5 block w-8 sm:w-10 group-hover:w-14 sm:group-hover:w-20 h-[2px] sm:h-[3px] rounded-full bg-primary/35 group-hover:bg-primary transition-all duration-300" />
-                  </div>
-                </div>
-              </Link>
+                    {/* Text Block — Clean & Concise on Mobile, Full Editorial on Desktop */}
+                    <div className="p-3 sm:px-5 sm:pt-5 sm:pb-6 text-center flex-1 flex flex-col justify-between relative">
+                      <div>
+                        <h3 className="text-[13px] sm:text-base lg:text-[17px] font-extrabold text-secondary group-hover:text-primary transition-colors mb-1.5 sm:mb-2.5 leading-snug">
+                          {service.title}
+                        </h3>
 
-              {/* Hanging Stem with Glowing Connector Node + Number (Scaled for Mobile & Desktop) */}
-              <div className="flex flex-col items-center">
-                <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary -mt-1 sm:-mt-1.5 z-20 ring-2 sm:ring-4 ring-white transition-transform duration-300 group-hover:scale-125" />
-                <span className="w-[1.5px] sm:w-[2px] h-3.5 sm:h-6 bg-gradient-to-b from-primary to-secondary transition-all duration-300 group-hover:h-5 sm:group-hover:h-8" />
-                <span className="mt-0.5 sm:mt-1.5 text-xl sm:text-3xl lg:text-4xl font-extrabold text-primary tracking-tight select-none transition-transform duration-300 group-hover:scale-110">
-                  {service.number}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+                        {/* Mobile Concise Copy */}
+                        <p className="sm:hidden text-[11px] text-gray-600 leading-relaxed">
+                          {service.mobileDesc}
+                        </p>
+
+                        {/* Tablet & Laptop Full Highlighted Copy */}
+                        <p className="hidden sm:block text-xs lg:text-[13.5px] text-gray-600 leading-[1.7]">
+                          {service.description}
+                        </p>
+                      </div>
+
+                      {/* Bottom Animated Accent Line Inside Card */}
+                      <span className="mx-auto mt-2.5 sm:mt-5 block w-8 sm:w-10 group-hover:w-14 sm:group-hover:w-20 h-[2px] sm:h-[3px] rounded-full bg-primary/35 group-hover:bg-primary transition-all duration-300" />
+                    </div>
+                  </div>
+                </Link>
+
+                {/* Hanging Stem with Glowing Connector Node + Number */}
+                <div className="flex flex-col items-center">
+                  <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary -mt-1 sm:-mt-1.5 z-20 ring-2 sm:ring-4 ring-white transition-transform duration-300 group-hover:scale-125" />
+                  <span className="w-[1.5px] sm:w-[2px] h-3.5 sm:h-6 bg-gradient-to-b from-primary to-secondary transition-all duration-300 group-hover:h-5 sm:group-hover:h-8" />
+                  <span className="mt-0.5 sm:mt-1.5 text-xl sm:text-3xl lg:text-4xl font-extrabold text-primary tracking-tight select-none transition-transform duration-300 group-hover:scale-110">
+                    {service.number}
+                  </span>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* 4. Strong Architectural Bottom CTA Bar */}
@@ -288,7 +321,7 @@ export default function ServicesOverview() {
               </span>
 
               <span className="relative z-10 text-xs sm:text-sm font-extrabold tracking-wide text-white group-hover:text-primary transition-colors">
-                Explore All 9 Health &amp; Safety Services
+                Explore All 10 Health &amp; Safety Services
               </span>
 
               <span className="relative z-10 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-primary text-gray-950 flex items-center justify-center overflow-hidden shrink-0">

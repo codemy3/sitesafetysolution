@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
-Sitemap: https://techfin.example.com/sitemap.xml
+Disallow: /api/
+
+Sitemap: https://sitesafety-solutions.co.uk/sitemap.xml

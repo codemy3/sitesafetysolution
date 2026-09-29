@@ -18,7 +18,7 @@ import {
 const projectMetrics = [
   {
     label: "Client",
-    value: "Byoot Construction Ltd",
+    value: "Private Client",
     icon: Building2,
   },
   {
@@ -376,7 +376,7 @@ export default function WorkPage() {
                     Manoj Shahi
                   </p>
                   <p className="text-xs sm:text-sm text-textLight font-medium">
-                    Construction Manager, Byoot Construction Ltd, London
+                    Project Manager, London
                   </p>
                 </div>
 

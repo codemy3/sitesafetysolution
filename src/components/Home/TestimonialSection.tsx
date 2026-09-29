@@ -76,7 +76,7 @@ export default function TestimonialSection() {
                   </span>
                 </div>
                 <p className="text-xs sm:text-sm text-textLight font-medium mt-0.5 truncate">
-                  Construction Manager, Byoot Construction Ltd
+                  Project Manager
                 </p>
               </div>
 
