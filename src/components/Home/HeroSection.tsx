@@ -49,36 +49,36 @@ export default function HeroSection() {
             </p>
           </div>
 
-          {/* Action Row — Side-by-side on mobile (grid-cols-2), original flex on desktop */}
-          <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-6 sm:mb-9">
+          {/* Action Row — Side-by-side on mobile and desktop */}
+          <div className="flex flex-row flex-wrap items-center gap-2.5 sm:gap-4 mb-6 sm:mb-9">
             <Link
               href="/contact"
-              className="group relative inline-flex items-center justify-between sm:justify-start gap-2 sm:gap-4 bg-white text-gray-950 font-bold text-xs sm:text-sm pl-4 pr-1.5 py-1.5 sm:pl-6 sm:pr-2 sm:py-2 rounded-full overflow-hidden transition-colors duration-300 shadow-xl"
+              className="group relative inline-flex items-center justify-start gap-2 sm:gap-4 bg-white text-gray-950 font-bold text-[11px] sm:text-sm pl-3.5 pr-1.5 py-1.5 sm:pl-6 sm:pr-2 sm:py-2 rounded-full overflow-hidden transition-colors duration-300 shadow-xl"
             >
               <span className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
               <span className="relative z-10 group-hover:text-gray-950 transition-colors">
                 Book Consultation
               </span>
-              <span className="relative z-10 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-gray-950 text-white flex items-center justify-center shrink-0 overflow-hidden">
+              <span className="relative z-10 w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-gray-950 text-white flex items-center justify-center shrink-0 overflow-hidden">
                 <ArrowUpRight
-                  size={14}
-                  className="transition-transform duration-300 group-hover:translate-x-5 group-hover:-translate-y-5"
+                  size={12}
+                  className="sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover:translate-x-5 group-hover:-translate-y-5"
                 />
                 <ArrowUpRight
-                  size={14}
-                  className="absolute -translate-x-5 translate-y-5 text-primary transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0"
+                  size={12}
+                  className="absolute -translate-x-5 translate-y-5 text-primary sm:w-3.5 sm:h-3.5 transition-transform duration-300 group-hover:translate-x-0 group-hover:translate-y-0"
                 />
               </span>
             </Link>
 
             <Link
               href="/services"
-              className="group relative inline-flex items-center justify-center sm:justify-start gap-2 sm:gap-2.5 px-3.5 py-2.5 sm:px-6 sm:py-3.5 rounded-full border border-white/25 bg-white/[0.04] sm:bg-transparent text-white text-xs sm:text-sm font-semibold overflow-hidden backdrop-blur-sm"
+              className="group relative inline-flex items-center justify-start gap-1.5 sm:gap-2.5 px-3.5 py-2 sm:px-6 sm:py-3.5 rounded-full border border-white/25 bg-white/[0.04] sm:bg-transparent text-white text-[11px] sm:text-sm font-semibold overflow-hidden backdrop-blur-sm"
             >
               <span className="absolute inset-0 bg-white/15 -translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out" />
               <Layers
-                size={15}
-                className="relative z-10 text-primary shrink-0 transition-transform duration-300 group-hover:rotate-12"
+                size={13}
+                className="relative z-10 text-primary shrink-0 transition-transform duration-300 group-hover:rotate-12 sm:w-4 sm:h-4"
               />
               <span className="relative z-10">Explore 10 Services</span>
             </Link>

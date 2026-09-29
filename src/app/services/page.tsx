@@ -290,17 +290,14 @@ export default function ServicesPage() {
       <div className="sticky top-[74px] sm:top-[86px] z-40 bg-white/95 backdrop-blur-md border-y border-gray-200 shadow-sm">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="grid grid-cols-5 sm:grid-cols-10 bg-gray-200/80 gap-px border-x border-gray-200/80">
-            {services.map((item, idx) => {
+            {services.map((item) => {
               const isActive = activeService === item.id;
-              const isLastMobileItem = idx === 9;
               return (
                 <button
                   key={item.num}
                   type="button"
                   onClick={() => scrollToService(item.id)}
-                  className={`group relative py-2 sm:py-3.5 px-1 sm:px-2 flex flex-col items-center justify-center text-center transition-colors cursor-pointer ${
-                    isLastMobileItem ? "col-span-2 sm:col-span-1" : "col-span-1"
-                  } ${
+                  className={`col-span-1 group relative py-2 sm:py-3.5 px-1 sm:px-2 flex flex-col items-center justify-center text-center transition-colors cursor-pointer ${
                     isActive
                       ? "bg-[#EAFBF0]"
                       : "bg-white hover:bg-gray-50"

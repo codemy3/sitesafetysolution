@@ -154,7 +154,7 @@ export default function WorkPage() {
                       <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-textLight">
                         {metric.label}
                       </span>
-                      <p className="text-xs sm:text-base font-extrabold text-secondary mt-0.5 truncate">
+                      <p className="text-xs sm:text-base font-extrabold text-secondary mt-0.5 leading-snug">
                         {metric.value}
                       </p>
                     </div>
