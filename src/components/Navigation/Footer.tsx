@@ -192,9 +192,22 @@ export default function Footer() {
 
         {/* 3. BOTTOM COPYRIGHT BAR */}
         <div className="flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-5 sm:pt-6 text-[11px] sm:text-xs text-gray-500 sm:flex-row">
-          <p className="text-center sm:text-left">
-            © {currentYear} Site Safety Solutions Ltd – All rights reserved
-          </p>
+          <div className="flex flex-col items-center sm:items-start gap-1.5 sm:gap-0">
+            <p className="text-center sm:text-left">
+              © {currentYear} Site Safety Solutions Ltd – All rights reserved
+            </p>
+            <p className="text-center sm:text-left text-[10px] sm:text-[11px] text-gray-600">
+              Website by{" "}
+              <a
+                href="https://maithri-portfolio-amber.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-gray-300 transition-colors"
+              >
+                Maithri
+              </a>
+            </p>
+          </div>
 
           <div className="flex items-center justify-center gap-5">
             <Link
