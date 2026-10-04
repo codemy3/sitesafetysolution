@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://sitesafety-solutions.co.uk/sitemap.xml
+Sitemap: https://www.sitesafety-solutions.co.uk/sitemap.xml

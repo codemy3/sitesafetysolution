@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   ExternalLink,
   Globe,
+  Instagram,
+  Facebook,
 } from "lucide-react";
 
 export default function ContactPage() {
@@ -208,6 +210,26 @@ export default function ContactPage() {
                     <p className="mt-2 text-[10px] sm:text-[11px] font-semibold text-textLight">
                       Company No. 17410537
                     </p>
+                  </div>
+                </div>
+
+                {/* Card 5: Social Media */}
+                <div className="col-span-2 bg-white rounded-2xl p-4 sm:p-5 border border-gray-200/90 shadow-xs flex flex-row items-center justify-between">
+                  <div>
+                    <span className="block text-[10px] sm:text-xs font-bold uppercase tracking-wider text-textLight mb-1">
+                      Social Media
+                    </span>
+                    <p className="text-xs sm:text-sm font-bold text-secondary leading-snug">
+                      Connect with us online
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                     <a href="https://www.instagram.com/sitesafetysolutionsuk/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-secondary flex items-center justify-center transition-colors">
+                       <Instagram size={18} />
+                     </a>
+                     <a href="https://www.facebook.com/profile.php?id=61594910103476" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-primary/10 text-primary hover:bg-primary hover:text-secondary flex items-center justify-center transition-colors">
+                       <Facebook size={18} />
+                     </a>
                   </div>
                 </div>
 

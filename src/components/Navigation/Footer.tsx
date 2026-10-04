@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Instagram, Facebook } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -31,6 +31,27 @@ export default function Footer() {
               consultancy, documentation and site support for businesses across
               the UK.
             </p>
+
+            <div className="mt-6 flex items-center gap-5">
+              <a
+                href="https://www.instagram.com/sitesafetysolutionsuk/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-gray-400 transition-colors hover:text-primary"
+              >
+                <Instagram size={20} />
+              </a>
+              <a
+                href="https://www.facebook.com/profile.php?id=61594910103476"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="text-gray-400 transition-colors hover:text-primary"
+              >
+                <Facebook size={20} />
+              </a>
+            </div>
           </div>
 
           {/* Right Columns (8 Cols on Desktop): 2-per-row on Mobile, 3-per-row on Tablet/Desktop */}
@@ -68,15 +89,15 @@ export default function Footer() {
                     Business Address
                   </p>
                   <p className="text-[11px] sm:text-xs leading-relaxed text-gray-400">
-                    188 Moorcroft Road,
+                    188 Moorcroft Road, Wythenshawe,
                     <br />
-                    Manchester, M23 0AJ
+                    Manchester, Greater Manchester, M23 0AJ
                   </p>
                 </div>
 
                 <div>
                   <p className="font-semibold text-primary text-xs">
-                    OSHCR Registered Consultant • UK-Wide
+                    OSHCR Registered • Serving Greater Manchester & UK-Wide
                   </p>
                 </div>
               </div>

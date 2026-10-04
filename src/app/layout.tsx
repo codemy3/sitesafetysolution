@@ -8,9 +8,9 @@ import ScrollToTopButton from '@/components/Navigation/ScrollToTopButton';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sitesafety-solutions.co.uk'),
+  metadataBase: new URL('https://www.sitesafety-solutions.co.uk'),
   title: {
-    default: 'Site Safety Solutions | Practical Health & Safety Support',
+    default: 'Health & Safety Consultants Manchester | Site Safety Solutions',
     template: '%s | Site Safety Solutions',
   },
   description: 'OSHCR Registered Consultant providing practical, reliable and cost-effective health and safety consultancy, CDM support, and site support across all UK sectors.',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Site Safety Solutions | Practical Health & Safety Support',
     description: 'Practical, reliable and cost-effective health and safety consultancy, CDM support, and site support across the UK.',
-    url: 'https://sitesafety-solutions.co.uk',
+    url: 'https://www.sitesafety-solutions.co.uk',
     siteName: 'Site Safety Solutions',
     images: [
       {
@@ -45,16 +45,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     name: 'Site Safety Solutions Ltd',
-    url: 'https://sitesafety-solutions.co.uk',
-    logo: 'https://sitesafety-solutions.co.uk/logo-bg-black.webp',
-    image: 'https://sitesafety-solutions.co.uk/logo-bg-black.webp',
+    url: 'https://www.sitesafety-solutions.co.uk',
+    logo: 'https://www.sitesafety-solutions.co.uk/logo-bg-black.webp',
+    image: 'https://www.sitesafety-solutions.co.uk/logo-bg-black.webp',
     description: 'OSHCR Registered Consultant providing practical, reliable and cost-effective health and safety consultancy, CDM support, and site support across all UK sectors.',
     telephone: '+447468010989',
     email: 'symon@sitesafety-solutions.co.uk',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '188 Moorcroft Road',
+      streetAddress: '188 Moorcroft Road, Wythenshawe',
       addressLocality: 'Manchester',
+      addressRegion: 'Greater Manchester',
       postalCode: 'M23 0AJ',
       addressCountry: 'GB',
     },
