@@ -7,6 +7,7 @@ import {
   Building2,
   ShieldCheck,
   ArrowUpRight,
+  MapPin,
 } from "lucide-react";
 
 const highlights = [
@@ -51,6 +52,105 @@ const howWeWork = [
   },
 ];
 
+const areasWeCover = [
+  {
+    country: "England",
+    locations: [
+      "Bath",
+      "Birmingham",
+      "Bradford",
+      "Brighton & Hove",
+      "Bristol",
+      "Cambridge",
+      "Canterbury",
+      "Carlisle",
+      "Chelmsford",
+      "Chester",
+      "Chichester",
+      "Colchester",
+      "Coventry",
+      "Derby",
+      "Doncaster",
+      "Durham",
+      "Ely",
+      "Exeter",
+      "Gloucester",
+      "Hereford",
+      "Kingston upon Hull (Hull)",
+      "Lancaster",
+      "Leeds",
+      "Leicester",
+      "Lichfield",
+      "Lincoln",
+      "Liverpool",
+      "London",
+      "Manchester",
+      "Milton Keynes",
+      "Newcastle upon Tyne",
+      "Norwich",
+      "Nottingham",
+      "Oxford",
+      "Peterborough",
+      "Plymouth",
+      "Portsmouth",
+      "Preston",
+      "Ripon",
+      "Salford",
+      "Salisbury",
+      "Sheffield",
+      "Southampton",
+      "Southend-on-Sea",
+      "St Albans",
+      "Stoke-on-Trent",
+      "Sunderland",
+      "Truro",
+      "Wakefield",
+      "Wells",
+      "Westminster",
+      "Winchester",
+      "Wolverhampton",
+      "Worcester",
+      "York",
+    ],
+  },
+  {
+    country: "Scotland",
+    locations: [
+      "Aberdeen",
+      "Dundee",
+      "Dunfermline",
+      "Edinburgh",
+      "Glasgow",
+      "Inverness",
+      "Perth",
+      "Stirling",
+    ],
+  },
+  {
+    country: "Wales",
+    locations: [
+      "Bangor",
+      "Cardiff",
+      "Newport",
+      "St Asaph",
+      "St Davids",
+      "Swansea",
+      "Wrexham",
+    ],
+  },
+  {
+    country: "Northern Ireland",
+    locations: [
+      "Armagh",
+      "Bangor",
+      "Belfast",
+      "Lisburn",
+      "Londonderry/Derry",
+      "Newry",
+    ],
+  },
+];
+
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-white overflow-hidden">
@@ -86,6 +186,10 @@ export default function AboutPage() {
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-3 sm:mb-4">
               Site Safety <span className="text-primary">Solutions Ltd</span>
             </h1>
+
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.16em] text-primary mb-2">
+              Supporting Businesses Across the UK
+            </p>
 
             <p className="text-xs sm:text-lg text-gray-300 max-w-md sm:max-w-xl mx-auto leading-relaxed">
               Practical Health &amp; Safety Support Built on Experience and
@@ -272,7 +376,63 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 4. MINIMAL CTA BANNER */}
+      {/* 4. AREAS WE COVER */}
+      <section className="py-14 sm:py-20 lg:py-24 bg-white">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-primary block mb-1.5 sm:mb-2">
+              UK-Wide Support
+            </span>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-secondary tracking-tight">
+              Areas We <span className="text-primary">Cover</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            {areasWeCover.map((area) => {
+              const headingId = `area-${area.country
+                .toLowerCase()
+                .replaceAll(" ", "-")}`;
+
+              return (
+                <section
+                  key={area.country}
+                  aria-labelledby={headingId}
+                  className={`rounded-2xl bg-[#F8FAFC] border border-gray-200/90 p-5 sm:p-7 ${
+                    area.country === "England" ? "md:row-span-3" : ""
+                  }`}
+                >
+                  <h3
+                    id={headingId}
+                    className="flex items-center gap-2.5 text-lg sm:text-xl font-extrabold text-secondary mb-4"
+                  >
+                    <MapPin className="w-5 h-5 text-primary shrink-0" />
+                    {area.country}
+                  </h3>
+                  <ul
+                    className={`grid gap-x-3 gap-y-2 sm:gap-x-5 ${
+                      area.country === "England"
+                        ? "grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                        : "grid-cols-2"
+                    }`}
+                  >
+                    {area.locations.map((location) => (
+                      <li
+                        key={location}
+                        className="text-xs sm:text-sm text-textLight leading-relaxed"
+                      >
+                        {location}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. MINIMAL CTA BANNER */}
       <section className="bg-white py-10 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div

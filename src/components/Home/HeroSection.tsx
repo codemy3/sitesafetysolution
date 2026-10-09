@@ -32,14 +32,18 @@ export default function HeroSection() {
 
 
           {/* Strict 2-Line Headline */}
-          <h1 className="text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[3.25rem] font-extrabold text-white uppercase tracking-tight sm:leading-[1.1] mb-4 sm:mb-5">
+          <h1 className="text-[1.9rem] leading-[1.08] sm:text-5xl lg:text-[3.25rem] font-extrabold text-white uppercase tracking-tight sm:leading-[1.1] mb-2 sm:mb-3">
             <span className="block sm:whitespace-nowrap">
-              Practical &amp; Compliant
+              Health and Safety
             </span>
             <span className="block sm:whitespace-nowrap">
-              Site Safety <span className="text-primary">Solutions.</span>
+              <span className="text-primary">Consultants</span>
             </span>
           </h1>
+
+          <p className="text-sm sm:text-lg font-semibold text-gray-200 mb-4 sm:mb-5">
+            Practical &amp; Compliant
+          </p>
 
           {/* Lead Paragraph */}
           <div className="relative pl-3.5 sm:pl-4 border-l-2 border-primary mb-6 sm:mb-8 max-w-lg">

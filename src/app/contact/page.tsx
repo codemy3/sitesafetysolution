@@ -107,6 +107,10 @@ export default function ContactPage() {
               <span className="text-primary">Safety Needs.</span>
             </h1>
 
+            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.16em] text-primary mb-2">
+              Supporting Businesses Across the UK
+            </p>
+
             <p className="text-sm sm:text-lg text-gray-300 max-w-xl mx-auto leading-relaxed">
               Whether you need a Fire Risk Assessment, RAMS documentation, site
               audits, or ongoing support, get in touch for a no-obligation
