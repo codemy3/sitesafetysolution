@@ -172,7 +172,7 @@ export default function ServicesOverview() {
         {/* 2. Compact Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 lg:mb-14">
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-secondary tracking-tight">
-            Our Core <span className="text-primary">Services</span>
+            <span className="text-primary">Health &amp; Safety</span> Consultancy Services
           </h2>
 
           <div className="flex items-center justify-center gap-2 mt-2.5 mb-2.5 sm:mt-3 sm:mb-3">
@@ -182,8 +182,7 @@ export default function ServicesOverview() {
           </div>
 
           <p className="text-xs sm:text-base text-textLight leading-relaxed px-2">
-            Practical, proportionate health and safety support focused on the
-            five essential compliance areas UK businesses need most.
+            Practical, professional and proportionate health and safety consultancy services, helping UK businesses meet legal requirements, manage workplace risks and maintain a safe, compliant working environment.
           </p>
         </div>
 
